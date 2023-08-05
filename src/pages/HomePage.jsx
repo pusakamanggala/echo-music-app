@@ -6,10 +6,12 @@ import {
   getFetchLimitByScreen,
 } from "../utils/helpers";
 import LoadingAnimation from "../img/LoadingAnimation.gif";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   const accessToken = getAccessTokenFromCookie();
   const [fetchLimit, setFetchLimit] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const updateFetchLimit = () => {
@@ -58,7 +60,12 @@ const HomePage = () => {
       {/* featured PLaylist */}
       <div className="flex justify-between items-center text-white">
         <h1 className="my-8 text-xl font-bold">Today Featured Playlist</h1>
-        <h1 className="font-semibold">Show all</h1>
+        <h1
+          className="font-semibold cursor-pointer hover:underline"
+          onClick={() => navigate("/explore/featured-playlist")}
+        >
+          Show all
+        </h1>
       </div>
       {isFeaturedPlaylistsLoading && (
         <img className="mx-auto w-28" src={LoadingAnimation} alt="" />
@@ -95,7 +102,12 @@ const HomePage = () => {
       {/* New Releases */}
       <div className="flex justify-between items-center text-white">
         <h1 className="my-8 text-xl font-bold">New Releases</h1>
-        <h1 className="font-semibold">Show all</h1>
+        <h1
+          className="font-semibold cursor-pointer hover:underline"
+          onClick={() => navigate("/explore/new-release")}
+        >
+          Show all
+        </h1>
       </div>
       {isNewAlbumLoading && (
         <img className="mx-auto w-28" src={LoadingAnimation} alt="" />

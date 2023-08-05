@@ -5,6 +5,7 @@ import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import PageNotFound from "../pages/PageNotFound";
 import AuthContext from "../context/AuthProvider";
+import ExploreFeaturedAndNewRelease from "../pages/ExploreFeaturedAndNewRelease";
 
 const Router = () => {
   const { setAccessToken } = useContext(AuthContext);
@@ -40,14 +41,24 @@ const Router = () => {
         />
         {/* Protected route */}
         {isLogin && (
-          <Route
-            path="/home"
-            element={
-              <DashboardLayout>
-                <HomePage />
-              </DashboardLayout>
-            }
-          />
+          <>
+            <Route
+              path="/home"
+              element={
+                <DashboardLayout>
+                  <HomePage />
+                </DashboardLayout>
+              }
+            />
+            <Route
+              path="/explore/:type"
+              element={
+                <DashboardLayout>
+                  <ExploreFeaturedAndNewRelease />
+                </DashboardLayout>
+              }
+            />
+          </>
         )}
         <Route
           path="*"

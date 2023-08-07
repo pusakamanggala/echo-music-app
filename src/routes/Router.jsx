@@ -6,6 +6,7 @@ import LoginPage from "../pages/LoginPage";
 import PageNotFound from "../pages/PageNotFound";
 import ExploreFeaturedAndNewRelease from "../pages/ExploreFeaturedAndNewRelease";
 import { getAccessTokenFromCookie } from "../utils/helpers";
+import Browse from "../pages/Browse";
 
 const Router = () => {
   const isAuthenticated = () => {
@@ -13,7 +14,14 @@ const Router = () => {
     return accessToken !== null; // If accessToken is not null, user is authenticated
   };
 
-  const isLogin = isAuthenticated();
+  let isLogin = isAuthenticated();
+
+  // Update isLogin to false if there is no accessToken
+  if (!getAccessTokenFromCookie()) {
+    isLogin = false;
+  }
+
+  console.log(isLogin); // This will now be false if there is no accessToken
 
   return (
     <BrowserRouter>
@@ -38,6 +46,14 @@ const Router = () => {
               element={
                 <DashboardLayout>
                   <ExploreFeaturedAndNewRelease />
+                </DashboardLayout>
+              }
+            />
+            <Route
+              path="/browse"
+              element={
+                <DashboardLayout>
+                  <Browse />
                 </DashboardLayout>
               }
             />

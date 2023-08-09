@@ -1,11 +1,9 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { useLocation, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
-  const location = useLocation();
-
   return (
     <div className="flex-col mr-2 text-white md:flex hidden">
       <div className="p-4 bg-white/10 rounded-lg mb-2">
@@ -26,12 +24,17 @@ const Sidebar = () => {
               icon={faHouse}
             />
           </NavLink>
-          <div>
+          <NavLink
+            to="/browse"
+            className={({ isActive }) =>
+              isActive ? "text-white" : "text-gray-500"
+            }
+          >
             <FontAwesomeIcon
-              className="h-full text-gray-500 hover:text-white transition-colors duration-500 ease-in-out cursor-pointer"
+              className="h-full hover:text-white transition-colors duration-500 ease-in-out cursor-pointer"
               icon={faMagnifyingGlass}
             />
-          </div>
+          </NavLink>
         </div>
       </nav>
       <div className="h-full flex flex-col justify-end items-center">

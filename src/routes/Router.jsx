@@ -7,6 +7,7 @@ import PageNotFound from "../pages/PageNotFound";
 import ExploreFeaturedAndNewRelease from "../pages/ExploreFeaturedAndNewRelease";
 import { getAccessTokenFromCookie } from "../utils/helpers";
 import Browse from "../pages/Browse";
+import CategoryPlaylists from "../pages/CategoryPlaylists";
 
 const Router = () => {
   const isAuthenticated = () => {
@@ -54,6 +55,14 @@ const Router = () => {
               element={
                 <DashboardLayout>
                   <Browse />
+                </DashboardLayout>
+              }
+            />
+            <Route
+              path="/browse/category/:categoryId"
+              element={
+                <DashboardLayout>
+                  <CategoryPlaylists />
                 </DashboardLayout>
               }
             />

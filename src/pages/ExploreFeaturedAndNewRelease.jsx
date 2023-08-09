@@ -19,7 +19,7 @@ const ExploreFeaturedPlaylist = () => {
 
   return (
     <div>
-      <h1 className="my-6 font-semibold text-2xl text-white">
+      <h1 className="my-6 font-bold text-2xl text-white">
         {type === "featured-playlist"
           ? "Today Featured PLaylist"
           : "New Release"}

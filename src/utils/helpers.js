@@ -31,3 +31,18 @@ export const getAccessTokenFromCookie = () => {
     }
   }
 };
+
+export const msToMinuteSecond = (milliseconds) => {
+  if (milliseconds < 0) {
+    throw new Error("Milliseconds must be a non-negative integer.");
+  }
+
+  const seconds = Math.floor(milliseconds / 1000);
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = seconds % 60;
+
+  const formattedTime = `${minutes}:${remainingSeconds
+    .toString()
+    .padStart(2, "0")}`;
+  return formattedTime;
+};

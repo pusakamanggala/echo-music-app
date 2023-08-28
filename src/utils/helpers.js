@@ -1,19 +1,20 @@
-export const getFetchLimitByScreen = () => {
+export const getFetchLimitByScreen = (playingView = true) => {
   const screenWidth = window.innerWidth;
+
   if (screenWidth >= 1280) {
-    // Extra-large screens (xl) - 6 columns
-    return 6;
+    // Extra-large screens (xl)
+    return playingView ? 5 : 6;
   } else if (screenWidth >= 1024) {
-    // Large screens (lg) - 5 columns
-    return 5;
+    // Large screens (lg)
+    return playingView ? 4 : 5;
   } else if (screenWidth >= 768) {
-    // Medium screens (md) - 4 columns
-    return 4;
+    // Medium screens (md)
+    return playingView ? 3 : 4;
   } else if (screenWidth >= 640) {
-    // Small screens (sm) - 3 columns
+    // Small screens (sm)
     return 3;
   } else {
-    // Extra small screens (xs) - 2 columns
+    // Extra small screens (xs)
     return 2;
   }
 };
@@ -29,6 +30,9 @@ export const getAccessTokenFromCookie = () => {
       const accessTokenValue = cookie.split("=")[1];
       return accessTokenValue;
     }
+    // else {
+    //   // window.location.reload();
+    // }
   }
 };
 

@@ -1,12 +1,13 @@
-import React from "react";
 import useFetchCategoryPlaylists from "../hooks/useFetchCategoryPlaylists";
 import { getAccessTokenFromCookie } from "../utils/helpers";
 import { useParams } from "react-router-dom";
 import LoadingAnimation from "../img/LoadingAnimation.gif";
+import useGetFetchLimit from "../hooks/useGetFecthLimit";
 
 const CategoryPlaylists = () => {
   const accessToken = getAccessTokenFromCookie();
   const { categoryId } = useParams();
+  const { gridSize } = useGetFetchLimit();
 
   // to fetch category informations
   const { data, isLoading, isError, isSuccess } = useFetchCategoryPlaylists({
@@ -52,7 +53,7 @@ const CategoryPlaylists = () => {
             <h1 className="font-bold text-2xl my-10 text-white">
               {data.name} Playlists
             </h1>
-            <div className="grid xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-4">
+            <div className={`grid ${gridSize} gap-4 `}>
               {playlistsData.playlists.items.map((playlist) => (
                 <div
                   key={playlist.id}

@@ -1,34 +1,14 @@
-import React, { useEffect, useState } from "react";
 import useFetchFeaturedPlaylists from "../hooks/useFecthFeaturedPLaylists";
 import useFetchNewReleaseAlbum from "../hooks/useFetchNewReleaseAlbum";
-import {
-  getAccessTokenFromCookie,
-  getFetchLimitByScreen,
-} from "../utils/helpers";
+import { getAccessTokenFromCookie } from "../utils/helpers";
 import LoadingAnimation from "../img/LoadingAnimation.gif";
 import { useNavigate } from "react-router-dom";
+import useGetFetchLimit from "../hooks/useGetFecthLimit";
 
 const HomePage = () => {
   const accessToken = getAccessTokenFromCookie();
-  const [fetchLimit, setFetchLimit] = useState();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const updateFetchLimit = () => {
-      setFetchLimit(getFetchLimitByScreen());
-    };
-
-    // Initial setup on component mount
-    updateFetchLimit();
-
-    // Event listener for screen size changes
-    window.addEventListener("resize", updateFetchLimit);
-
-    // Clean up the event listener on component unmount
-    return () => {
-      window.removeEventListener("resize", updateFetchLimit);
-    };
-  }, []);
+  const { gridSize, fetchLimit } = useGetFetchLimit();
 
   const {
     data: newAlbumData,
@@ -48,17 +28,17 @@ const HomePage = () => {
   } = useFetchFeaturedPlaylists({ accessToken, limit: fetchLimit });
 
   return (
-    <div>
+    <>
       {/* Banner */}
-      <div className="bg-black h-96 rounded-lg text-white overflow-hidden relative w-full">
+      <section className="bg-black h-96 rounded-lg text-white overflow-hidden relative w-full">
         <img
           src="https://c4.wallpaperflare.com/wallpaper/1021/802/327/musicians-freddie-mercury-freddy-mercury-brian-may-roger-taylor-john-deacon-men-queen-music-band-black-background-album-covers-bohemian-rhapsody-wallpaper-preview.jpg"
           alt="banner"
           className="h-full w-full object-contain"
         />
-      </div>
+      </section>
       {/* featured PLaylist */}
-      <div className="flex justify-between items-center text-white">
+      <section className="flex justify-between items-center text-white">
         <h1 className="my-8 text-xl font-bold">Today Featured Playlist</h1>
         <h1
           className="font-semibold cursor-pointer hover:underline"
@@ -66,7 +46,7 @@ const HomePage = () => {
         >
           Show all
         </h1>
-      </div>
+      </section>
       {isFeaturedPlaylistsLoading && (
         <img className="mx-auto w-28" src={LoadingAnimation} alt="" />
       )}
@@ -77,7 +57,7 @@ const HomePage = () => {
       )}
       {isFeaturedPlaylistsSuccess && (
         <>
-          <div className="grid xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-4">
+          <section className={`grid ${gridSize} gap-4 `}>
             {featuredPlaylistsData.map((playlist) => (
               <div
                 key={playlist.id}
@@ -96,11 +76,11 @@ const HomePage = () => {
                 </p>
               </div>
             ))}
-          </div>
+          </section>
         </>
       )}
       {/* New Releases */}
-      <div className="flex justify-between items-center text-white">
+      <section className="flex justify-between items-center text-white">
         <h1 className="my-8 text-xl font-bold">New Releases</h1>
         <h1
           className="font-semibold cursor-pointer hover:underline"
@@ -108,7 +88,7 @@ const HomePage = () => {
         >
           Show all
         </h1>
-      </div>
+      </section>
       {isNewAlbumLoading && (
         <img className="mx-auto w-28" src={LoadingAnimation} alt="" />
       )}
@@ -117,7 +97,7 @@ const HomePage = () => {
           Something went wrong, please try again
         </h1>
       )}
-      <div className="grid xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-4 ">
+      <section className={`grid ${gridSize} gap-4 `}>
         {isNewAlbumSuccess &&
           newAlbumData.albums.items.map((album) => (
             <div
@@ -137,8 +117,8 @@ const HomePage = () => {
               </p>
             </div>
           ))}
-      </div>
-    </div>
+      </section>
+    </>
   );
 };
 

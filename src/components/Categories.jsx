@@ -1,8 +1,8 @@
-import React from "react";
 import useFetchCategories from "../hooks/useFetchCategories";
 import { getAccessTokenFromCookie } from "../utils/helpers";
 import { useNavigate } from "react-router-dom";
 import LoadingAnimation from "../img/LoadingAnimation.gif";
+import useGetFetchLimit from "../hooks/useGetFecthLimit";
 
 const Categories = () => {
   const navigate = useNavigate();
@@ -10,6 +10,8 @@ const Categories = () => {
   const { data, isError, isLoading, isSuccess } = useFetchCategories({
     accessToken,
   });
+
+  const { gridSize } = useGetFetchLimit();
 
   return (
     <div className="h-full">
@@ -28,7 +30,7 @@ const Categories = () => {
       {isSuccess && (
         <>
           <h1 className="font-bold text-white text-xl my-3">Browse All</h1>
-          <div className="grid xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-4 ">
+          <div className={`grid ${gridSize} gap-4 `}>
             {data.categories.items.map((category) => (
               <div
                 key={category.id}

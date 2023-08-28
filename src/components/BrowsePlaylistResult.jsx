@@ -1,31 +1,12 @@
-import React, { useState, useEffect } from "react";
 import useSearchSpotifyItem from "../hooks/useSearchSpotifyItem";
-import {
-  getAccessTokenFromCookie,
-  getFetchLimitByScreen,
-} from "../utils/helpers";
+import { getAccessTokenFromCookie } from "../utils/helpers";
 import LoadingAnimation from "../img/LoadingAnimation.gif";
+import useGetFetchLimit from "../hooks/useGetFecthLimit";
+import PropTypes from "prop-types";
 
 const BrowsePlaylistResult = ({ searchQuery }) => {
   const accessToken = getAccessTokenFromCookie();
-  const [fetchLimit, setFetchLimit] = useState();
-
-  useEffect(() => {
-    const updateFetchLimit = () => {
-      setFetchLimit(getFetchLimitByScreen());
-    };
-
-    // Initial setup on component mount
-    updateFetchLimit();
-
-    // Event listener for screen size changes
-    window.addEventListener("resize", updateFetchLimit);
-
-    // Clean up the event listener on component unmount
-    return () => {
-      window.removeEventListener("resize", updateFetchLimit);
-    };
-  }, []);
+  const { gridSize, fetchLimit } = useGetFetchLimit();
 
   const { data, isLoading, isError, isSuccess } = useSearchSpotifyItem({
     accessToken,
@@ -47,7 +28,7 @@ const BrowsePlaylistResult = ({ searchQuery }) => {
       {isSuccess && (
         <div className="w-full">
           <h1 className="font-bold text-white text-xl my-6">Playlists</h1>
-          <div className="grid xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-4 ">
+          <div className={` grid ${gridSize} gap-4 `}>
             {data.playlists.items.map((playlist) => (
               <div
                 key={playlist.id}
@@ -71,6 +52,10 @@ const BrowsePlaylistResult = ({ searchQuery }) => {
       )}
     </>
   );
+};
+
+BrowsePlaylistResult.propTypes = {
+  searchQuery: PropTypes.string.isRequired,
 };
 
 export default BrowsePlaylistResult;

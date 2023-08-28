@@ -2,12 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
-import { AuthProvider } from "./context/AuthProvider.jsx";
+import { NowPlayingProvider } from "./context/NowPlayingProvider.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <AuthProvider>
+    <NowPlayingProvider>
       <App />
-    </AuthProvider>
+    </NowPlayingProvider>
   </React.StrictMode>
 );

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { faMagnifyingGlass, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import BrowseTopResult from "../components/BrowseTopResult";
@@ -19,7 +19,7 @@ const Browse = () => {
     accessToken,
     limit: 1,
     searchQuery: searchQuery,
-    searchType: "playlist",
+    searchType: ["playlist", "track", "artist"],
     autoFetch: searchQuery !== "" ? true : false, // only fetch when searchQuery is not empty
   });
 
@@ -33,6 +33,7 @@ const Browse = () => {
       >
         <FontAwesomeIcon icon={faMagnifyingGlass} className="text-white" />
         <input
+          title="Browse Item"
           autoFocus
           type="text"
           value={searchQuery}
@@ -55,34 +56,42 @@ const Browse = () => {
           onClick={() => setSearchQuery("")}
         />
       </div>
-      {/* <h1 className="my-6 font-bold text-2xl text-white">Browse all</h1> */}
       {!searchQuery && <Categories />}
-      {isSuccess && data.playlists.items.length > 0 && (
+      {isSuccess && searchQuery && searchQuery !== "" && (
         <>
-          {searchQuery && searchQuery !== "" && (
-            <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-2 gap-6">
+            {data.playlists.items.length > 0 && (
               <BrowseTopResult searchQuery={searchQuery} />
+            )}
+            {data.tracks.items.length > 0 && (
               <BrowseTrackResult searchQuery={searchQuery} />
-            </div>
+            )}
+          </div>
+          {data.playlists.items.length > 0 && (
+            <BrowsePlaylistResult searchQuery={searchQuery} />
           )}
-          <BrowsePlaylistResult searchQuery={searchQuery} />
-          <BrowseArtistResult searchQuery={searchQuery} />
+          {data.artists.items.length > 0 && (
+            <BrowseArtistResult searchQuery={searchQuery} />
+          )}
         </>
       )}
 
-      {isSuccess && data.playlists.items.length < 1 && (
-        <div className=" h-full flex justify-center text-white items-center ">
-          <div className="text-center">
-            <h1 className="font-bold text-2xl mb-2">
-              No result found for "{searchQuery}"
-            </h1>
-            <h1>
-              Please make sure your words are spelled correctly, or use fewer or
-              different keywords.
-            </h1>
+      {isSuccess &&
+        data.playlists.items.length < 1 &&
+        data.artists.items.length < 1 &&
+        data.tracks.items.length < 1 && (
+          <div className=" h-full flex justify-center text-white items-center ">
+            <div className="text-center">
+              <h1 className="font-bold text-2xl mb-2">
+                No result found for &quot;{searchQuery}&quot;
+              </h1>
+              <h1>
+                Please make sure your words are spelled correctly, or use fewer
+                or different keywords.
+              </h1>
+            </div>
           </div>
-        </div>
-      )}
+        )}
       {isError && (
         <div className=" h-full flex justify-center text-white items-center ">
           <h1 className="font-semibold text-center text-white">

@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import DashboardLayout from "../layout/DashboardLayout";
 import HomePage from "../pages/HomePage";
@@ -21,8 +20,6 @@ const Router = () => {
   if (!getAccessTokenFromCookie()) {
     isLogin = false;
   }
-
-  console.log(isLogin); // This will now be false if there is no accessToken
 
   return (
     <BrowserRouter>

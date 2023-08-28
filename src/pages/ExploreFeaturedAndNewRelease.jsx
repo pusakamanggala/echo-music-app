@@ -1,4 +1,3 @@
-import React from "react";
 import useFetchFeaturedPlaylists from "../hooks/useFecthFeaturedPLaylists";
 import useFetchNewReleaseAlbum from "../hooks/useFetchNewReleaseAlbum";
 import { getAccessTokenFromCookie } from "../utils/helpers";

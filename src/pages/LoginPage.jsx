@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import useLogin from "../hooks/useLogin";
 
 const LoginPage = () => {
@@ -20,6 +19,8 @@ const LoginPage = () => {
   return (
     <div className="h-screen bg-sky-600 flex justify-center items-center">
       <button
+        type="button"
+        title="Login"
         className="text-white p-3 rounded-lg bg-green-600 shadow-md"
         onClick={handleLogin}
       >

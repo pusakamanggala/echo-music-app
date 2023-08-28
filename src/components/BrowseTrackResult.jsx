@@ -1,16 +1,24 @@
-import React from "react";
+import { useContext } from "react";
 import useSearchSpotifyItem from "../hooks/useSearchSpotifyItem";
 import { getAccessTokenFromCookie, msToMinuteSecond } from "../utils/helpers";
 import LoadingAnimation from "../img/LoadingAnimation.gif";
+import NowPlayingContext from "../context/NowPlayingProvider";
+import PropTypes from "prop-types";
 
 const BrowseTrackResult = ({ searchQuery }) => {
   const accessToken = getAccessTokenFromCookie();
+  const { setNowPlaying, setPlayingView } = useContext(NowPlayingContext);
   const { data, isLoading, isError, isSuccess } = useSearchSpotifyItem({
     accessToken,
     limit: 4,
     searchQuery: searchQuery,
     searchType: "track",
   });
+
+  const handlePlay = (trackId) => {
+    setNowPlaying(trackId);
+    setPlayingView(true);
+  };
 
   return (
     <>
@@ -30,6 +38,7 @@ const BrowseTrackResult = ({ searchQuery }) => {
               <div
                 key={track.id}
                 className="flex hover:bg-white/40 transition-colors duration-500 ease-in-out cursor-pointer p-2 rounded-md"
+                onClick={() => handlePlay(track.id)}
               >
                 <img
                   className="h-12 mr-3"
@@ -47,7 +56,7 @@ const BrowseTrackResult = ({ searchQuery }) => {
                           E
                         </span>
                       )}
-                      {track.artists[0].name}
+                      {track.artists.map((artist) => artist.name).join(", ")}
                     </h1>
                   </div>
                   <div>
@@ -61,6 +70,10 @@ const BrowseTrackResult = ({ searchQuery }) => {
       )}
     </>
   );
+};
+
+BrowseTrackResult.propTypes = {
+  searchQuery: PropTypes.string.isRequired,
 };
 
 export default BrowseTrackResult;

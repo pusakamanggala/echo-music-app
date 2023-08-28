@@ -1,7 +1,7 @@
 import useFetchCategoryPlaylists from "../hooks/useFetchCategoryPlaylists";
 import { getAccessTokenFromCookie } from "../utils/helpers";
 import { useParams } from "react-router-dom";
-import LoadingAnimation from "../img/LoadingAnimation.gif";
+import LoadingAnimation from "../img/loadingAnimation.gif";
 import useGetFetchLimit from "../hooks/useGetFecthLimit";
 
 const CategoryPlaylists = () => {

@@ -6,7 +6,7 @@ import { getAccessTokenFromCookie } from "../utils/helpers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import useFetchArtist from "../hooks/useFetchArtist";
-import LoadingAnimation from "../img/LoadingAnimation.gif";
+import LoadingAnimation from "../img/loadingAnimation.gif";
 
 const PlayingView = () => {
   const accessToken = getAccessTokenFromCookie();

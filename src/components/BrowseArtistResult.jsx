@@ -1,6 +1,6 @@
 import useSearchSpotifyItem from "../hooks/useSearchSpotifyItem";
 import { getAccessTokenFromCookie } from "../utils/helpers";
-import LoadingAnimation from "../img/LoadingAnimation.gif";
+import LoadingAnimation from "../img/loadingAnimation.gif";
 import useGetFetchLimit from "../hooks/useGetFecthLimit";
 import PropTypes from "prop-types";
 

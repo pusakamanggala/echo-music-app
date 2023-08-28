@@ -1,7 +1,7 @@
 import useFetchFeaturedPlaylists from "../hooks/useFecthFeaturedPLaylists";
 import useFetchNewReleaseAlbum from "../hooks/useFetchNewReleaseAlbum";
 import { getAccessTokenFromCookie } from "../utils/helpers";
-import LoadingAnimation from "../img/LoadingAnimation.gif";
+import LoadingAnimation from "../img/loadingAnimation.gif";
 import { useNavigate } from "react-router-dom";
 import useGetFetchLimit from "../hooks/useGetFecthLimit";
 

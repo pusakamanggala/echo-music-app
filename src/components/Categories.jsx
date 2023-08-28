@@ -1,7 +1,7 @@
 import useFetchCategories from "../hooks/useFetchCategories";
 import { getAccessTokenFromCookie } from "../utils/helpers";
 import { useNavigate } from "react-router-dom";
-import LoadingAnimation from "../img/LoadingAnimation.gif";
+import LoadingAnimation from "../img/loadingAnimation.gif";
 import useGetFetchLimit from "../hooks/useGetFecthLimit";
 
 const Categories = () => {

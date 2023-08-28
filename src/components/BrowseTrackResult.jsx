@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import useSearchSpotifyItem from "../hooks/useSearchSpotifyItem";
 import { getAccessTokenFromCookie, msToMinuteSecond } from "../utils/helpers";
-import LoadingAnimation from "../img/LoadingAnimation.gif";
+import LoadingAnimation from "../img/loadingAnimation.gif";
 import NowPlayingContext from "../context/NowPlayingProvider";
 import PropTypes from "prop-types";
 

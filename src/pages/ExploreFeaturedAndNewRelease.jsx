@@ -2,7 +2,7 @@ import useFetchFeaturedPlaylists from "../hooks/useFecthFeaturedPLaylists";
 import useFetchNewReleaseAlbum from "../hooks/useFetchNewReleaseAlbum";
 import { getAccessTokenFromCookie } from "../utils/helpers";
 import { useParams } from "react-router-dom";
-import LoadingAnimation from "../img/LoadingAnimation.gif";
+import LoadingAnimation from "../img/loadingAnimation.gif";
 
 const ExploreFeaturedPlaylist = () => {
   const { type } = useParams();

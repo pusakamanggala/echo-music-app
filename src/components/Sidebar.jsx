@@ -1,19 +1,19 @@
-import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   return (
-    <div className="flex-col mr-2 text-white md:flex hidden">
+    <nav className="flex-col mr-2 text-white md:flex hidden">
       <div className="p-4 bg-white/10 rounded-lg mb-2">
         {/* Sidebar header */}
-        <h2 className="text-xl  font-bold">LOGO</h2>
+        <h1 className="font-bold text-xl">echo.</h1>
       </div>
-      <nav className="p-7 bg-white/10 rounded-lg">
+      <div className="p-7 bg-white/10 rounded-lg">
         {/* Sidebar navigation */}
         <div className="grid gap-7 items-center">
           <NavLink
+            title="Home"
             to="/home"
             className={({ isActive }) =>
               isActive ? "text-white" : "text-gray-500"
@@ -26,6 +26,7 @@ const Sidebar = () => {
           </NavLink>
           <NavLink
             to="/browse"
+            title="Browse"
             className={({ isActive }) =>
               isActive ? "text-white" : "text-gray-500"
             }
@@ -36,12 +37,8 @@ const Sidebar = () => {
             />
           </NavLink>
         </div>
-      </nav>
-      <div className="h-full flex flex-col justify-end items-center">
-        <h1>Echo.</h1>
-        <h1>2023</h1>
       </div>
-    </div>
+    </nav>
   );
 };
 

@@ -3,10 +3,12 @@ import useFetchNewReleaseAlbum from "../hooks/useFetchNewReleaseAlbum";
 import { getAccessTokenFromCookie } from "../utils/helpers";
 import { useParams } from "react-router-dom";
 import LoadingAnimation from "../img/loadingAnimation.gif";
+import useGetFetchLimit from "../hooks/useGetFecthLimit";
 
 const ExploreFeaturedPlaylist = () => {
   const { type } = useParams();
   const accessToken = getAccessTokenFromCookie();
+  const { gridSize } = useGetFetchLimit();
 
   const fetchHook =
     type === "new-release"
@@ -33,7 +35,7 @@ const ExploreFeaturedPlaylist = () => {
       )}
       {isSuccess && (
         <>
-          <div className="grid xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-4">
+          <div className={` grid ${gridSize} gap-4 `}>
             {type === "featured-playlist" &&
               data.map((playlist) => (
                 <div

@@ -2,9 +2,12 @@ import useSearchSpotifyItem from "../hooks/useSearchSpotifyItem";
 import { getAccessTokenFromCookie } from "../utils/helpers";
 import LoadingAnimation from "../img/loadingAnimation.gif";
 import PropTypes from "prop-types";
+import useNavigatePlaylistDetails from "../hooks/useNavigatePlaylistDetails";
 
 const BrowseTopResult = ({ searchQuery }) => {
   const accessToken = getAccessTokenFromCookie();
+  const navigatePlaylistDetails = useNavigatePlaylistDetails();
+
   const { data, isLoading, isError, isSuccess } = useSearchSpotifyItem({
     accessToken,
     limit: 1,
@@ -25,7 +28,10 @@ const BrowseTopResult = ({ searchQuery }) => {
       {isSuccess && (
         <div className="w-full">
           <h1 className="font-bold text-white text-xl my-3">Top Result</h1>
-          <div className="bg-white/20 backdrop-filter rounded-lg p-4  text-white hover:bg-white/40 transition-colors duration-500 ease-in-out cursor-pointer">
+          <div
+            className="bg-white/20 backdrop-filter rounded-lg p-4  text-white hover:bg-white/40 transition-colors duration-500 ease-in-out cursor-pointer"
+            onClick={() => navigatePlaylistDetails(data.playlists.items[0].id)}
+          >
             <img
               className="h-44 rounded-md"
               src={data.playlists.items[0].images[0].url}

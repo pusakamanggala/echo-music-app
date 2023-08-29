@@ -3,11 +3,13 @@ import { getAccessTokenFromCookie } from "../utils/helpers";
 import { useParams } from "react-router-dom";
 import LoadingAnimation from "../img/loadingAnimation.gif";
 import useGetFetchLimit from "../hooks/useGetFecthLimit";
+import useNavigatePlaylistDetails from "../hooks/useNavigatePlaylistDetails";
 
 const CategoryPlaylists = () => {
   const accessToken = getAccessTokenFromCookie();
   const { categoryId } = useParams();
   const { gridSize } = useGetFetchLimit();
+  const navigatePlaylistDetails = useNavigatePlaylistDetails();
 
   // to fetch category informations
   const { data, isLoading, isError, isSuccess } = useFetchCategoryPlaylists({
@@ -57,6 +59,7 @@ const CategoryPlaylists = () => {
               {playlistsData.playlists.items.map((playlist) => (
                 <div
                   key={playlist.id}
+                  onClick={() => navigatePlaylistDetails(playlist.id)}
                   className="bg-white/20 backdrop-filter rounded-lg p-4 shadow-md text-white hover:bg-white/40 transition-colors duration-500 ease-in-out cursor-pointer"
                 >
                   <img

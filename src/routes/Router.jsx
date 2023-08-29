@@ -7,6 +7,7 @@ import ExploreFeaturedAndNewRelease from "../pages/ExploreFeaturedAndNewRelease"
 import { getAccessTokenFromCookie } from "../utils/helpers";
 import Browse from "../pages/Browse";
 import CategoryPlaylists from "../pages/CategoryPlaylists";
+import PlaylistDetails from "../pages/PlaylistDetails";
 
 const Router = () => {
   const isAuthenticated = () => {
@@ -60,6 +61,14 @@ const Router = () => {
               element={
                 <DashboardLayout>
                   <CategoryPlaylists />
+                </DashboardLayout>
+              }
+            />
+            <Route
+              path="/playlist-items/:playlistId"
+              element={
+                <DashboardLayout>
+                  <PlaylistDetails />
                 </DashboardLayout>
               }
             />

@@ -7,18 +7,13 @@ import PropTypes from "prop-types";
 
 const BrowseTrackResult = ({ searchQuery }) => {
   const accessToken = getAccessTokenFromCookie();
-  const { setNowPlaying, setPlayingView } = useContext(NowPlayingContext);
+  const { handlePlayTrack } = useContext(NowPlayingContext);
   const { data, isLoading, isError, isSuccess } = useSearchSpotifyItem({
     accessToken,
     limit: 4,
     searchQuery: searchQuery,
     searchType: "track",
   });
-
-  const handlePlay = (trackId) => {
-    setNowPlaying(trackId);
-    setPlayingView(true);
-  };
 
   return (
     <>
@@ -38,7 +33,7 @@ const BrowseTrackResult = ({ searchQuery }) => {
               <div
                 key={track.id}
                 className="flex hover:bg-white/40 transition-colors duration-500 ease-in-out cursor-pointer p-2 rounded-md"
-                onClick={() => handlePlay(track.id)}
+                onClick={() => handlePlayTrack(track.id)}
               >
                 <img
                   className="h-12 mr-3"

@@ -8,11 +8,17 @@ export const NowPlayingProvider = ({ children }) => {
     const storedNowPlaying = sessionStorage.getItem("nowPlaying");
     return storedNowPlaying || "";
   });
+
   useEffect(() => {
     sessionStorage.setItem("nowPlaying", nowPlaying);
   }, [nowPlaying]);
 
   const [playingView, setPlayingView] = useState(nowPlaying ? true : false);
+
+  const handlePlayTrack = (trackId) => {
+    setNowPlaying(trackId);
+    setPlayingView(true);
+  };
 
   return (
     <NowPlayingContext.Provider
@@ -21,6 +27,7 @@ export const NowPlayingProvider = ({ children }) => {
         setNowPlaying,
         playingView,
         setPlayingView,
+        handlePlayTrack,
       }}
     >
       {children}

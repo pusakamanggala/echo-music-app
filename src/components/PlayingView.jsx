@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import useFetchArtist from "../hooks/useFetchArtist";
 import LoadingAnimation from "../img/loadingAnimation.gif";
+import ArtistTopTracks from "./ArtistTopTracks";
 
 const PlayingView = () => {
   const accessToken = getAccessTokenFromCookie();
@@ -39,8 +40,8 @@ const PlayingView = () => {
       )}
       {isSuccess && (
         <>
-          <div className="flex items-center mb-4">
-            <h1 className="font-bold ">{data.name}</h1>
+          <div className="flex items-center mb-4 justify-between">
+            <h1 className="font-bold line-clamp-1">{data.name}</h1>
             <button
               type="button"
               title="Close Playing View"
@@ -49,7 +50,6 @@ const PlayingView = () => {
               <FontAwesomeIcon icon={faXmark} />
             </button>
           </div>
-
           <img
             src={data.album.images[0].url}
             alt="Song Cover"
@@ -61,6 +61,7 @@ const PlayingView = () => {
               {data.artists.map((artist) => artist.name).join(", ")}
             </h2>
           </section>
+          <ArtistTopTracks artistId={data.artists[0].id} />
           {isArtistSuccess && (
             <section className="my-4">
               <img

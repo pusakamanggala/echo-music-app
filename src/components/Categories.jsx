@@ -34,10 +34,14 @@ const Categories = () => {
             {data.categories.items.map((category) => (
               <div
                 key={category.id}
-                className="rounded-lg overflow-hidden relative cursor-pointer hover:scale-105"
+                className="overflow-hidden relative cursor-pointer hover:scale-105"
                 onClick={() => navigate(`/browse/category/${category.id}`)}
               >
-                <img src={category.icons[0].url} alt="" />
+                <img
+                  src={category.icons[0].url}
+                  alt=""
+                  className="rounded-lg"
+                />
                 <h1 className="absolute bottom-2 right-3 text-lg font-bold text-white">
                   {category.name}
                 </h1>

@@ -16,6 +16,7 @@ import useFetchTrack from "../hooks/useFetchTrack";
 useFetchTrack;
 import { getAccessTokenFromCookie, msToMinuteSecond } from "../utils/helpers";
 import musicIcon from "../img/music-icon.jpg";
+import useNavigateToArtistDetails from "../hooks/useNavigateToArtistDetails";
 
 const SongPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -23,6 +24,9 @@ const SongPlayer = () => {
   const [volume, setVolume] = useState(70);
   const [showNote, setShowNote] = useState(false);
   const accessToken = getAccessTokenFromCookie();
+
+  const navigateToArtistDetails = useNavigateToArtistDetails();
+
   const { nowPlaying, setPlayingView, playingView } =
     useContext(NowPlayingContext);
 
@@ -93,8 +97,18 @@ const SongPlayer = () => {
             {isSuccess && (
               <>
                 <h1 className="line-clamp-1">{data.name}</h1>
-                <h1 className="text-sm text-gray-400 line-clamp-1">
-                  {data.artists.map((artist) => artist.name).join(", ")}
+                <h1 className="text-gray-400 line-clamp-1">
+                  {data.artists.map((artist, index) => (
+                    <span key={artist.id}>
+                      <span
+                        className="cursor-pointer hover:underline hover:text-white text-sm"
+                        onClick={() => navigateToArtistDetails(artist.id)}
+                      >
+                        {artist.name}
+                      </span>
+                      {index !== data.artists.length - 1 && ", "}
+                    </span>
+                  ))}
                 </h1>
               </>
             )}
@@ -129,7 +143,6 @@ const SongPlayer = () => {
             {isSuccess && (
               <p>{msToMinuteSecond((progress * data.duration_ms) / 100)}</p>
             )}
-
             <input
               title="Song Progress"
               type="range"
@@ -157,7 +170,7 @@ const SongPlayer = () => {
             </button>
           )}
           <div
-            className={`flex justify-center items-center ${
+            className={`md:flex justify-center items-center hidden ${
               nowPlaying ? "text-white" : "text-gray-500"
             }`}
           >

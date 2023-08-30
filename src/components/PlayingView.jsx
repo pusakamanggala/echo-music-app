@@ -8,10 +8,13 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import useFetchArtist from "../hooks/useFetchArtist";
 import LoadingAnimation from "../img/loadingAnimation.gif";
 import ArtistTopTracks from "./ArtistTopTracks";
+import useNavigateToArtistDetails from "../hooks/useNavigateToArtistDetails";
 
 const PlayingView = () => {
   const accessToken = getAccessTokenFromCookie();
   const { nowPlaying, setPlayingView } = useContext(NowPlayingContext);
+  const navigateToArtistDetails = useNavigateToArtistDetails();
+
   const { data, isLoading, isError, isSuccess } = useFetchTrack({
     accessToken,
     trackId: nowPlaying,
@@ -57,9 +60,19 @@ const PlayingView = () => {
           />
           <section className="my-4">
             <h1 className="font-semibold text-xl">{data.name}</h1>
-            <h2 className="text-gray-400">
-              {data.artists.map((artist) => artist.name).join(", ")}
-            </h2>
+            <h1 className="text-gray-400 line-clamp-1">
+              {data.artists.map((artist, index) => (
+                <span key={artist.id}>
+                  <span
+                    className="cursor-pointer hover:underline hover:text-white text-sm"
+                    onClick={() => navigateToArtistDetails(artist.id)}
+                  >
+                    {artist.name}
+                  </span>
+                  {index !== data.artists.length - 1 && ", "}
+                </span>
+              ))}
+            </h1>
           </section>
           <ArtistTopTracks artistId={data.artists[0].id} />
           {isArtistSuccess && (
@@ -69,7 +82,12 @@ const PlayingView = () => {
                 alt=""
                 className="w-full rounded-lg"
               />
-              <h1 className="text-xl font-bold">{artistData.name}</h1>
+              <h1
+                className="text-xl font-bold hover:underline cursor-pointer"
+                onClick={() => navigateToArtistDetails(artistData.id)}
+              >
+                {artistData.name}
+              </h1>
               <h2 className="capitalize">{artistData.type}</h2>
             </section>
           )}

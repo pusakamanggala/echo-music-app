@@ -8,6 +8,7 @@ import { getAccessTokenFromCookie } from "../utils/helpers";
 import Browse from "../pages/Browse";
 import CategoryPlaylists from "../pages/CategoryPlaylists";
 import PlaylistDetails from "../pages/PlaylistDetails";
+import ArtistDetails from "../pages/ArtistDetails";
 
 const Router = () => {
   const isAuthenticated = () => {
@@ -69,6 +70,14 @@ const Router = () => {
               element={
                 <DashboardLayout>
                   <PlaylistDetails />
+                </DashboardLayout>
+              }
+            />
+            <Route
+              path="/artist/:artistId"
+              element={
+                <DashboardLayout>
+                  <ArtistDetails />
                 </DashboardLayout>
               }
             />

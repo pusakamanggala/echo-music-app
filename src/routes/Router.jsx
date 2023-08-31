@@ -9,6 +9,7 @@ import Browse from "../pages/Browse";
 import CategoryPlaylists from "../pages/CategoryPlaylists";
 import PlaylistDetails from "../pages/PlaylistDetails";
 import ArtistDetails from "../pages/ArtistDetails";
+import AlbumDetails from "../pages/AlbumDetails";
 
 const Router = () => {
   const isAuthenticated = () => {
@@ -78,6 +79,14 @@ const Router = () => {
               element={
                 <DashboardLayout>
                   <ArtistDetails />
+                </DashboardLayout>
+              }
+            />
+            <Route
+              path="/album/:albumId"
+              element={
+                <DashboardLayout>
+                  <AlbumDetails />
                 </DashboardLayout>
               }
             />

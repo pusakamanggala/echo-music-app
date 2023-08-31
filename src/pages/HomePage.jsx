@@ -5,6 +5,7 @@ import LoadingAnimation from "../img/loadingAnimation.gif";
 import { useNavigate } from "react-router-dom";
 import useGetFetchLimit from "../hooks/useGetFecthLimit";
 import useNavigatePlaylistDetails from "../hooks/useNavigatePlaylistDetails";
+import useNavigateToAlbumDetails from "../hooks/useNavigateToAlbumDetails";
 
 const HomePage = () => {
   const accessToken = getAccessTokenFromCookie();
@@ -12,6 +13,7 @@ const HomePage = () => {
   const { gridSize, fetchLimit } = useGetFetchLimit();
 
   const navigatePlaylistDetails = useNavigatePlaylistDetails();
+  const navigateAlbumDetails = useNavigateToAlbumDetails();
 
   const {
     data: newAlbumData,
@@ -106,6 +108,7 @@ const HomePage = () => {
           newAlbumData.albums.items.map((album) => (
             <div
               key={album.id}
+              onClick={() => navigateAlbumDetails(album.id)}
               className="bg-white/20 backdrop-filter rounded-lg p-4 shadow-md text-white hover:bg-white/40 transition-colors duration-500 ease-in-out cursor-pointer"
             >
               <img

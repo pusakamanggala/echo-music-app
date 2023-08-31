@@ -1,16 +1,20 @@
 import useFetchArtistAlbums from "../hooks/useFetchArtistAlbums";
 import { getAccessTokenFromCookie } from "../utils/helpers";
 import useGetFecthLimit from "../hooks/useGetFecthLimit";
+import useNavigateToAlbumDetails from "../hooks/useNavigateToAlbumDetails";
 
 const ArtistsAlbum = ({ artistId }) => {
   const accessToken = getAccessTokenFromCookie();
   const { gridSize, fetchLimit } = useGetFecthLimit();
+  const navigateAlbumDetails = useNavigateToAlbumDetails();
+
   const { data, isSuccess } = useFetchArtistAlbums({
     accessToken,
     limit: fetchLimit,
     offset: 0,
     artistId,
   });
+
   return (
     <>
       {isSuccess && (
@@ -25,6 +29,7 @@ const ArtistsAlbum = ({ artistId }) => {
             {data.items.map((album) => (
               <div
                 key={album.id}
+                onClick={() => navigateAlbumDetails(album.id)}
                 className="bg-white/20 backdrop-filter rounded-lg p-4 shadow-md text-white hover:bg-white/40 transition-colors duration-500 ease-in-out cursor-pointer"
               >
                 <img

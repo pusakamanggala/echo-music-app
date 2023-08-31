@@ -9,11 +9,13 @@ import useFetchArtist from "../hooks/useFetchArtist";
 import LoadingAnimation from "../img/loadingAnimation.gif";
 import ArtistTopTracks from "./ArtistTopTracks";
 import useNavigateToArtistDetails from "../hooks/useNavigateToArtistDetails";
+import useNavigateToAlbumDetails from "../hooks/useNavigateToAlbumDetails";
 
 const PlayingView = () => {
   const accessToken = getAccessTokenFromCookie();
   const { nowPlaying, setPlayingView } = useContext(NowPlayingContext);
   const navigateToArtistDetails = useNavigateToArtistDetails();
+  const navigateToAlbumDetails = useNavigateToAlbumDetails();
 
   const { data, isLoading, isError, isSuccess } = useFetchTrack({
     accessToken,
@@ -44,7 +46,12 @@ const PlayingView = () => {
       {isSuccess && (
         <>
           <div className="flex items-center mb-4 justify-between">
-            <h1 className="font-bold line-clamp-1">{data.name}</h1>
+            <h1
+              className="line-clamp-1 hover:underline cursor-pointer"
+              onClick={() => navigateToAlbumDetails(data.album.id)}
+            >
+              {data.name}
+            </h1>
             <button
               type="button"
               title="Close Playing View"
@@ -59,7 +66,12 @@ const PlayingView = () => {
             className="rounded-lg mr-2 w-full"
           />
           <section className="my-4">
-            <h1 className="font-semibold text-xl">{data.name}</h1>
+            <h1
+              className="font-semibold text-xl hover:underline cursor-pointer"
+              onClick={() => navigateToAlbumDetails(data.album.id)}
+            >
+              {data.name}
+            </h1>
             <h1 className="text-gray-400 line-clamp-1">
               {data.artists.map((artist, index) => (
                 <span key={artist.id}>

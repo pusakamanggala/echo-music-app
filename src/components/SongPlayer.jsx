@@ -17,6 +17,7 @@ useFetchTrack;
 import { getAccessTokenFromCookie, msToMinuteSecond } from "../utils/helpers";
 import musicIcon from "../img/music-icon.jpg";
 import useNavigateToArtistDetails from "../hooks/useNavigateToArtistDetails";
+import useNavigateToAlbumDetails from "../hooks/useNavigateToAlbumDetails";
 
 const SongPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -25,6 +26,7 @@ const SongPlayer = () => {
   const [showNote, setShowNote] = useState(false);
   const accessToken = getAccessTokenFromCookie();
 
+  const navigateToAlbumDetails = useNavigateToAlbumDetails();
   const navigateToArtistDetails = useNavigateToArtistDetails();
 
   const { nowPlaying, setPlayingView, playingView } =
@@ -92,11 +94,15 @@ const SongPlayer = () => {
             alt="Song Cover"
             className="h-16 rounded-md mr-2"
           />
-
           <div className="song-details">
             {isSuccess && (
               <>
-                <h1 className="line-clamp-1">{data.name}</h1>
+                <h1
+                  className="line-clamp-1 hover:underline cursor-pointer"
+                  onClick={() => navigateToAlbumDetails(data.album.id)}
+                >
+                  {data.name}
+                </h1>
                 <h1 className="text-gray-400 line-clamp-1">
                   {data.artists.map((artist, index) => (
                     <span key={artist.id}>

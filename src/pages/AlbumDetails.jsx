@@ -7,12 +7,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
 import NowPlayingContext from "../context/NowPlayingProvider";
 import LoadingAnimation from "../img/loadingAnimation.gif";
+import MusicPlayingIcon from "../img/musicPlayingIcon.gif";
 
 const AlbumDetails = () => {
   const accessToken = getAccessTokenFromCookie();
   const navigateToArtistDetails = useNavigateToArtistDetails();
   const { albumId } = useParams();
-  const { handlePlayTrack } = useContext(NowPlayingContext);
+  const { handlePlayTrack, nowPlaying } = useContext(NowPlayingContext);
 
   const { data, isLoading, isError, isSuccess } = useFetchAlbumDetails({
     accessToken,
@@ -84,12 +85,26 @@ const AlbumDetails = () => {
                     onClick={() => handlePlayTrack(track.id)}
                     className="hover:bg-white/40 hover:text-white transition-colors duration-200 ease-in-out cursor-pointer text-gray-400"
                   >
-                    <td className="px-0 rounded-l-md p-2 text-center">
-                      {index + 1}
+                    <td className="px-0 rounded-l-md p-2 text-center w-10">
+                      {nowPlaying === track.id ? (
+                        <img
+                          src={MusicPlayingIcon}
+                          alt=""
+                          className="h-10 w-6 mx-auto"
+                        />
+                      ) : (
+                        index + 1
+                      )}
                     </td>
                     <td className="flex items-center p-2">
                       <div>
-                        <h1 className="text-white line-clamp-1">
+                        <h1
+                          className={`${
+                            nowPlaying === track.id
+                              ? "text-green-500"
+                              : "text-white"
+                          } line-clamp-1 font-semibold`}
+                        >
                           {track.name}
                         </h1>
                         <h1 className="text-gray-400 line-clamp-1">

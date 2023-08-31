@@ -10,6 +10,7 @@ import LoadingAnimation from "../img/loadingAnimation.gif";
 import ArtistTopTracks from "./ArtistTopTracks";
 import useNavigateToArtistDetails from "../hooks/useNavigateToArtistDetails";
 import useNavigateToAlbumDetails from "../hooks/useNavigateToAlbumDetails";
+import MusicIcon from "../img/music-icon.jpg";
 
 const PlayingView = () => {
   const accessToken = getAccessTokenFromCookie();
@@ -90,7 +91,7 @@ const PlayingView = () => {
           {isArtistSuccess && (
             <section className="my-4">
               <img
-                src={artistData.images[0].url}
+                src={artistData.images[0]?.url || MusicIcon}
                 alt=""
                 className="w-full rounded-lg"
               />

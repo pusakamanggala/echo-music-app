@@ -6,11 +6,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
 import LoadingAnimation from "../img/loadingAnimation.gif";
 import NowPlayingContext from "../context/NowPlayingProvider";
+import MusicPlayingIcon from "../img/musicPlayingIcon.gif";
+import MusicIcon from "../img/music-icon.jpg";
 
 const PlaylistDetails = () => {
   const accessToken = getAccessTokenFromCookie();
   const { playlistId } = useParams();
-  const { handlePlayTrack } = useContext(NowPlayingContext);
+  const { handlePlayTrack, nowPlaying } = useContext(NowPlayingContext);
   const { data, isSuccess, isLoading, isError } = useFetchPlaylistDetails({
     accessToken,
     playlistId,
@@ -75,15 +77,29 @@ const PlaylistDetails = () => {
                         className="hover:bg-white/40 hover:text-white transition-colors duration-200 ease-in-out cursor-pointer text-gray-400"
                       >
                         <td className="px-0 rounded-l-md p-2 text-center">
-                          {index + 1}
+                          {nowPlaying === track.track.id ? (
+                            <img
+                              src={MusicPlayingIcon}
+                              alt=""
+                              className="h-10 w-6 mx-auto"
+                            />
+                          ) : (
+                            index + 1
+                          )}
                         </td>
                         <td className="flex items-center p-2">
                           <img
                             className="h-12 mr-2"
-                            src={track.track.album.images[2].url}
+                            src={track.track.album.images[2]?.url || MusicIcon}
                           />
                           <div>
-                            <h1 className="text-white line-clamp-1">
+                            <h1
+                              className={`${
+                                nowPlaying === track.track.id
+                                  ? "text-green-500"
+                                  : "text-white"
+                              } line-clamp-1 font-semibold`}
+                            >
                               {track.track.name}
                             </h1>
                             <h1 className="line-clamp-1">

@@ -4,6 +4,7 @@ import { getAccessTokenFromCookie } from "../utils/helpers";
 import ArtistTopTracks from "../components/ArtistTopTracks";
 import LoadingAnimation from "../img/loadingAnimation.gif";
 import ArtistsAlbum from "../components/ArtistAlbum";
+import MusicIcon from "../img/music-icon.jpg";
 
 const ArtistDetails = () => {
   const { artistId } = useParams();
@@ -40,7 +41,7 @@ const ArtistDetails = () => {
             </div>
             <img
               className="h-52 rounded-md hidden md:block"
-              src={data.images[2].url}
+              src={data.images[2]?.url || MusicIcon}
               alt=""
             />
           </section>

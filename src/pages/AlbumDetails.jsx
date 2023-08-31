@@ -98,19 +98,7 @@ const AlbumDetails = () => {
                               E
                             </span>
                           )}
-                          {data.artists.map((artist, index) => (
-                            <span key={artist.id}>
-                              <span
-                                className="cursor-pointer hover:underline hover:text-white text-sm"
-                                onClick={() =>
-                                  navigateToArtistDetails(artist.id)
-                                }
-                              >
-                                {artist.name}
-                              </span>
-                              {index !== data.artists.length - 1 && ", "}
-                            </span>
-                          ))}
+                          {data.artists.map((artist) => artist.name).join(", ")}
                         </h1>
                       </div>
                     </td>

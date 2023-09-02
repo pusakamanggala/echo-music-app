@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 
 const BrowseTrackResult = ({ searchQuery }) => {
   const accessToken = getAccessTokenFromCookie();
-  const { handlePlayTrack } = useContext(NowPlayingContext);
+  const { handlePlayTrack, nowPlaying } = useContext(NowPlayingContext);
   const { data, isLoading, isError, isSuccess } = useSearchSpotifyItem({
     accessToken,
     limit: 4,
@@ -42,7 +42,13 @@ const BrowseTrackResult = ({ searchQuery }) => {
                 />
                 <div className="flex justify-between w-full items-center text-white">
                   <div className="flex flex-col">
-                    <h1 className="font-semibold text-lg  line-clamp-1">
+                    <h1
+                      className={`${
+                        nowPlaying === track.id
+                          ? "text-green-500"
+                          : "text-white"
+                      } font-semibold text-lg line-clamp-1`}
+                    >
                       {track.name}
                     </h1>
                     <h1 className="text-gray-300">

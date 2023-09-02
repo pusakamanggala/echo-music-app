@@ -11,7 +11,7 @@ const DashboardLayout = ({ children }) => {
   const { playingView } = useContext(NowPlayingContext);
   const isMobile = useIsMobile();
   return (
-    <div className="h-screen relative">
+    <div className="h-dvh relative">
       <div className={`flex h-full bg-black pb-0 ${!isMobile && "p-4"}`}>
         {!isMobile && <Sidebar />}
         <main

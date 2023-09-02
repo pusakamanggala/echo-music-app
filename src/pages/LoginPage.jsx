@@ -17,7 +17,7 @@ const LoginPage = () => {
     window.location.reload();
   }
   return (
-    <div className="h-screen bg-sky-600 flex justify-center items-center">
+    <div className="h-dvh bg-sky-600 flex justify-center items-center">
       <button
         type="button"
         title="Login"

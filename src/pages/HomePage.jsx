@@ -35,13 +35,14 @@ const HomePage = () => {
   return (
     <>
       {/* Banner */}
-      <section className="bg-black h-96 rounded-lg text-white overflow-hidden relative w-full">
+      <section className="rounded-lg bg-black text-white overflow-hidden relative w-full">
         <img
-          src="https://c4.wallpaperflare.com/wallpaper/1021/802/327/musicians-freddie-mercury-freddy-mercury-brian-may-roger-taylor-john-deacon-men-queen-music-band-black-background-album-covers-bohemian-rhapsody-wallpaper-preview.jpg"
+          src="https://wallpapercave.com/wp/wp6386546.jpg"
           alt="banner"
-          className="h-full w-full object-contain"
+          className="h-auto w-full object-contain sm:h-72 md:h-96"
         />
       </section>
+
       {/* featured PLaylist */}
       <section className="flex justify-between items-center text-white">
         <h1 className="my-8 text-xl font-bold">Today Featured Playlist</h1>

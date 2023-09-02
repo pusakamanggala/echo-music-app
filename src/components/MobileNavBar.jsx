@@ -43,14 +43,14 @@ const MobileNavBar = () => {
         <button
           type="button"
           title="Note"
-          className={` h-5 flex relative ${
+          className={` flex relative ${
             showNote ? "text-green-700" : "text-white animate-pulse"
           } `}
           onClick={() => setShowNote(!showNote)}
         >
           <FontAwesomeIcon icon={faCircleExclamation} className="h-6" />
           {showNote && (
-            <h1 className="text-xs m-2 absolute bottom-4 right-2 bg-white/60 text-black backdrop-blur-md w-80 p-2 rounded-md font-semibold text-justify">
+            <h1 className="text-xs m-2 absolute bottom-5 -right-5 bg-white/60 text-black backdrop-blur-md w-80 p-2 rounded-md font-semibold text-justify">
               While you can interact with the player&apos;s controls, it
               won&apos;t play actual songs due to technical constraints. For an
               immersive music streaming experience, it is recommended to use

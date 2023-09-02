@@ -18,6 +18,7 @@ import { getAccessTokenFromCookie, msToMinuteSecond } from "../utils/helpers";
 import musicIcon from "../img/music-icon.jpg";
 import useNavigateToArtistDetails from "../hooks/useNavigateToArtistDetails";
 import useNavigateToAlbumDetails from "../hooks/useNavigateToAlbumDetails";
+import useIsMobile from "../hooks/useIsMobile";
 
 const SongPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -25,6 +26,7 @@ const SongPlayer = () => {
   const [volume, setVolume] = useState(70);
   const [showNote, setShowNote] = useState(false);
   const accessToken = getAccessTokenFromCookie();
+  const isMobile = useIsMobile();
 
   const navigateToAlbumDetails = useNavigateToAlbumDetails();
   const navigateToArtistDetails = useNavigateToArtistDetails();
@@ -87,7 +89,11 @@ const SongPlayer = () => {
 
   return (
     <>
-      <div className="grid grid-cols-3 text-white">
+      <div
+        className={`grid ${
+          isMobile ? "grid-cols-2" : "grid-cols-3"
+        } text-white p-2`}
+      >
         <div className="flex items-center">
           <img
             src={isSuccess ? data.album.images[2].url : musicIcon} // Replace with your song cover image URL
@@ -120,15 +126,52 @@ const SongPlayer = () => {
             )}
           </div>
         </div>
-        <div className="flex flex-col justify-evenly">
-          <section
-            className={`flex justify-center ${
-              nowPlaying ? "text-white" : "text-gray-500"
-            }`}
-          >
-            <button type="button" title="Previous">
-              <FontAwesomeIcon icon={faBackwardStep} />
-            </button>
+        {!isMobile && (
+          <div className="flex flex-col justify-evenly">
+            <section
+              className={`flex justify-center ${
+                nowPlaying ? "text-white" : "text-gray-500"
+              }`}
+            >
+              <button type="button" title="Previous">
+                <FontAwesomeIcon icon={faBackwardStep} />
+              </button>
+              <button
+                type="button"
+                title={isPlaying ? "Pause" : "Play"}
+                onClick={togglePlayPause}
+              >
+                <FontAwesomeIcon
+                  className="mx-4"
+                  icon={nowPlaying && isPlaying ? faPauseCircle : faPlayCircle}
+                  size="2x"
+                  disabled={!nowPlaying}
+                />
+              </button>
+              <button type="button" title="Next">
+                <FontAwesomeIcon icon={faForwardStep} />
+              </button>
+            </section>
+            <section className="md:flex justify-center items-center text-sm text-gray-400 hidden">
+              {isSuccess && (
+                <p>{msToMinuteSecond((progress * data.duration_ms) / 100)}</p>
+              )}
+              <input
+                title="Song Progress"
+                type="range"
+                min="0"
+                max="100"
+                value={progress}
+                onChange={handleProgressChange}
+                className="progress-bar mx-2"
+                disabled={!nowPlaying}
+              />
+              {isSuccess && <p>{msToMinuteSecond(data.duration_ms)}</p>}
+            </section>
+          </div>
+        )}
+        <section className="flex justify-evenly items-center">
+          {isMobile && (
             <button
               type="button"
               title={isPlaying ? "Pause" : "Play"}
@@ -141,28 +184,7 @@ const SongPlayer = () => {
                 disabled={!nowPlaying}
               />
             </button>
-            <button type="button" title="Next">
-              <FontAwesomeIcon icon={faForwardStep} />
-            </button>
-          </section>
-          <section className="md:flex justify-center items-center text-sm text-gray-400 hidden">
-            {isSuccess && (
-              <p>{msToMinuteSecond((progress * data.duration_ms) / 100)}</p>
-            )}
-            <input
-              title="Song Progress"
-              type="range"
-              min="0"
-              max="100"
-              value={progress}
-              onChange={handleProgressChange}
-              className="progress-bar mx-2"
-              disabled={!nowPlaying}
-            />
-            {isSuccess && <p>{msToMinuteSecond(data.duration_ms)}</p>}
-          </section>
-        </div>
-        <section className="flex justify-evenly items-center">
+          )}
           {nowPlaying && (
             <button
               type="button"
@@ -192,26 +214,31 @@ const SongPlayer = () => {
               disabled={!nowPlaying}
             />
           </div>
-          <div className="relative">
-            {showNote && (
-              <h1 className="text-xs m-2 absolute bottom-3 right-3 bg-white/60 text-black backdrop-blur-md w-80 p-2 rounded-md font-semibold text-justify">
-                While you can interact with the player&apos;s controls, it
-                won&apos;t play actual songs due to technical constraints. For
-                an immersive music streaming experience, it is recommended to
-                use official Spotify music streaming platforms.
-              </h1>
-            )}
-            <button
-              type="button"
-              title="Note"
-              className={` h-5 flex ${
-                showNote ? "text-green-700" : "text-white animate-pulse"
-              } `}
-              onClick={() => setShowNote(!showNote)}
-            >
-              <FontAwesomeIcon icon={faCircleExclamation} className="h-full" />
-            </button>
-          </div>
+          {!isMobile && (
+            <div className="relative">
+              {showNote && (
+                <h1 className="text-xs m-2 absolute bottom-3 right-3 bg-white/60 text-black backdrop-blur-md w-80 p-2 rounded-md font-semibold text-justify">
+                  While you can interact with the player&apos;s controls, it
+                  won&apos;t play actual songs due to technical constraints. For
+                  an immersive music streaming experience, it is recommended to
+                  use official Spotify music streaming platforms.
+                </h1>
+              )}
+              <button
+                type="button"
+                title="Note"
+                className={` h-5 flex ${
+                  showNote ? "text-green-700" : "text-white animate-pulse"
+                } `}
+                onClick={() => setShowNote(!showNote)}
+              >
+                <FontAwesomeIcon
+                  icon={faCircleExclamation}
+                  className="h-full"
+                />
+              </button>
+            </div>
+          )}
         </section>
       </div>
       <input
@@ -221,7 +248,7 @@ const SongPlayer = () => {
         max="100"
         value={progress}
         onChange={handleProgressChange}
-        className="progress-bar w-full block md:hidden mt-2"
+        className="progress-bar w-full block md:hidden"
         disabled={!nowPlaying}
       />
     </>

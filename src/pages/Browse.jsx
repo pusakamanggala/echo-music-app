@@ -8,11 +8,13 @@ import { getAccessTokenFromCookie } from "../utils/helpers";
 import BrowsePlaylistResult from "../components/BrowsePlaylistResult";
 import BrowseArtistResult from "../components/BrowseArtistResult";
 import Categories from "../components/Categories";
+import useIsMobile from "../hooks/useIsMobile";
 
 const Browse = () => {
   const [isFocused, setIsFocused] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const accessToken = getAccessTokenFromCookie();
+  const isMobile = useIsMobile();
 
   // fetch one data here to check if the searchQuery is exist
   const { data, isError, isSuccess } = useSearchSpotifyItem({
@@ -59,14 +61,26 @@ const Browse = () => {
       {!searchQuery && <Categories />}
       {isSuccess && searchQuery && searchQuery !== "" && (
         <>
-          <div className="grid grid-cols-2 gap-6">
-            {data.playlists.items.length > 0 && (
-              <BrowseTopResult searchQuery={searchQuery} />
-            )}
-            {data.tracks.items.length > 0 && (
-              <BrowseTrackResult searchQuery={searchQuery} />
-            )}
-          </div>
+          {isMobile ? (
+            <div className="grid gap-6">
+              {data.tracks.items.length > 0 && (
+                <BrowseTrackResult searchQuery={searchQuery} />
+              )}
+              {data.playlists.items.length > 0 && (
+                <BrowseTopResult searchQuery={searchQuery} />
+              )}
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 gap-6">
+              {data.playlists.items.length > 0 && (
+                <BrowseTopResult searchQuery={searchQuery} />
+              )}
+              {data.tracks.items.length > 0 && (
+                <BrowseTrackResult searchQuery={searchQuery} />
+              )}
+            </div>
+          )}
+
           {data.playlists.items.length > 0 && (
             <BrowsePlaylistResult searchQuery={searchQuery} />
           )}

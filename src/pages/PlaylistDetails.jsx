@@ -12,6 +12,7 @@ import LoadingAnimation from "../img/loadingAnimation.gif";
 import NowPlayingContext from "../context/NowPlayingProvider";
 import MusicPlayingIcon from "../img/musicPlayingIcon.gif";
 import MusicIcon from "../img/music-icon.jpg";
+import useIsMobile from "../hooks/useIsMobile";
 
 const PlaylistDetails = () => {
   const accessToken = getAccessTokenFromCookie();
@@ -21,6 +22,8 @@ const PlaylistDetails = () => {
     accessToken,
     playlistId,
   });
+
+  const isMobile = useIsMobile();
 
   const sumTrackDuration = (data) => {
     let totalDuration = 0;
@@ -89,7 +92,7 @@ const PlaylistDetails = () => {
                 <tr>
                   <th className="font-medium p-2 text-center">#</th>
                   <th className="font-medium">Title</th>
-                  <th className="font-medium">Album</th>
+                  {!isMobile && <th className="font-medium">Album</th>}
                   <th className="font-medium text-center">
                     <FontAwesomeIcon icon={faClock} />
                   </th>
@@ -137,7 +140,7 @@ const PlaylistDetails = () => {
                             </h1>
                           </div>
                         </td>
-                        <td>{track.track.album.name}</td>
+                        {!isMobile && <td>{track.track.album.name}</td>}
                         <td className="rounded-r-md text-center">
                           {msToMinuteSecond(track.track.duration_ms)}
                         </td>

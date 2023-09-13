@@ -52,18 +52,18 @@ const AlbumDetails = () => {
         <>
           <section className="flex text-white items-end">
             <img
-              className="h-52 w-52 object-cover mr-4 items-end"
+              className="md:h-52 md:w-52 w-32 h-32 object-cover mr-4 items-end"
               src={data.images[1].url}
               alt=""
             />
-            <div className="flex flex-col md:space-y-5 space-y-3">
+            <div className="flex flex-col">
               <p className="capitalize font-semibold">{data.album_type}</p>
               <h1
                 className={`${
                   data.name.length < 20
-                    ? "md:text-8xl text-5xl"
+                    ? "md:text-8xl text-3xl"
                     : "md:text-5xl text-2xl"
-                } font-bold line-clamp-3`}
+                } font-bold line-clamp-3 py-3 md:py-5`}
               >
                 {data.name}
               </h1>

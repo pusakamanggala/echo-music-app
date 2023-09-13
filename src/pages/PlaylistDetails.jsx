@@ -48,26 +48,26 @@ const PlaylistDetails = () => {
       )}
       {isSuccess && (
         <>
-          <section className="flex mt-10 items-end space">
+          <section className="flex mt-10 items-end">
             <img
-              className="mr-4 h-52 w-52 object-cover"
+              className="mr-4 md:h-52 md:w-52 w-32 h-32 object-cover"
               src={data.images[0].url}
               alt=""
             />
-            <div className="flex flex-col md:space-y-5 space-y-3 justify-end text-white font-semibold">
+            <div className="flex flex-col justify-end text-white font-semibold">
               <h3 className="capitalize">{data.type}</h3>
               <h1
                 className={`${
                   data.name.length < 20
-                    ? "md:text-8xl text-5xl"
+                    ? "md:text-8xl text-3xl"
                     : "md:text-5xl text-2xl"
-                } font-bold line-clamp-3`}
+                } font-bold line-clamp-3 py-3 md:py-5`}
               >
                 {data.name}
               </h1>
               <div className="space-x-reverse space-x-1">
                 <p
-                  className="text-gray-300"
+                  className="text-gray-300 line-clamp-3 mb-1"
                   dangerouslySetInnerHTML={{ __html: data.description }}
                 />
                 <p className="inline-block">{data.owner.display_name}</p>

@@ -58,7 +58,15 @@ const AlbumDetails = () => {
             />
             <div>
               <p className="capitalize font-semibold">{data.album_type}</p>
-              <h1 className="text-8xl font-bold my-5">{data.name}</h1>
+              <h1
+                className={`${
+                  data.name.length < 20
+                    ? "md:text-8xl text-5xl"
+                    : "md:text-5xl text-2xl"
+                } font-bold my-5 line-clamp-3`}
+              >
+                {data.name}
+              </h1>
               <div className="space-x-1 font-semibold">
                 <h1 className="line-clamp-1 inline-block align-bottom">
                   {data.artists.map((artist, index) => (

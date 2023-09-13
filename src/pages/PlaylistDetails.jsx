@@ -58,7 +58,15 @@ const PlaylistDetails = () => {
             </div>
             <div className="flex flex-col justify-end text-white font-semibold ">
               <h3 className="capitalize">{data.type}</h3>
-              <h1 className="text-5xl font-bold my-4">{data.name}</h1>
+              <h1
+                className={`${
+                  data.name.length < 20
+                    ? "md:text-8xl text-5xl"
+                    : "md:text-5xl text-2xl"
+                } font-bold my-5 line-clamp-3`}
+              >
+                {data.name}
+              </h1>
               <p className="text-gray-300">{data.description}</p>
               <div className=" space-x-1 mt-2">
                 <p className="inline-block">{data.owner.display_name}</p>

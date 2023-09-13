@@ -1,6 +1,10 @@
 import { useContext } from "react";
 import useFetchPlaylistDetails from "../hooks/useFetchPlaylistDetails";
-import { getAccessTokenFromCookie, msToMinuteSecond } from "../utils/helpers";
+import {
+  getAccessTokenFromCookie,
+  msToMinuteSecond,
+  msToSentence,
+} from "../utils/helpers";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
@@ -17,6 +21,16 @@ const PlaylistDetails = () => {
     accessToken,
     playlistId,
   });
+
+  const sumTrackDuration = (data) => {
+    let totalDuration = 0;
+    data.tracks.items.forEach((track) => {
+      if (track.track) {
+        totalDuration += track.track.duration_ms;
+      }
+    });
+    return msToSentence(totalDuration);
+  };
 
   return (
     <>
@@ -37,7 +51,7 @@ const PlaylistDetails = () => {
           <section className="flex mt-10">
             <div className="mr-2">
               <img
-                className="w-60 object-contain"
+                className="h-52 w-52 object-cover"
                 src={data.images[0].url}
                 alt=""
               />
@@ -46,12 +60,17 @@ const PlaylistDetails = () => {
               <h3 className="capitalize">{data.type}</h3>
               <h1 className="text-5xl font-bold my-4">{data.name}</h1>
               <p className="text-gray-300">{data.description}</p>
-              <div className="flex space-x-1 mt-2">
-                <p>{data.owner.display_name}</p>
-                <p>•</p>
-                <p>{data.followers.total.toLocaleString()} likes</p>
-                <p>•</p>
-                <p>{data.tracks.total} songs</p>
+              <div className=" space-x-1 mt-2">
+                <p className="inline-block">{data.owner.display_name}</p>
+                <p className="inline-block">•</p>
+                <p className="inline-block">
+                  {data.followers.total.toLocaleString()} likes
+                </p>
+                <p className="inline-block">•</p>
+                <p className="inline-block">{data.tracks.total} songs,</p>
+                <p className="text-gray-300 inline-block">
+                  {sumTrackDuration(data)}
+                </p>
               </div>
             </div>
           </section>

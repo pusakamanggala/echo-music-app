@@ -1,6 +1,10 @@
 import { useContext } from "react";
 import useFetchAlbumDetails from "../hooks/useFetchAlbumDetails";
-import { getAccessTokenFromCookie, msToMinuteSecond } from "../utils/helpers";
+import {
+  getAccessTokenFromCookie,
+  msToMinuteSecond,
+  msToSentence,
+} from "../utils/helpers";
 import { useParams } from "react-router-dom";
 import useNavigateToArtistDetails from "../hooks/useNavigateToArtistDetails";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -20,6 +24,16 @@ const AlbumDetails = () => {
     albumId,
   });
 
+  const sumTrackDuration = (data) => {
+    let totalDuration = 0;
+    data.tracks.items.forEach((track) => {
+      if (track) {
+        totalDuration += track.duration_ms;
+      }
+    });
+    return msToSentence(totalDuration);
+  };
+
   return (
     <section className="h-full">
       {isLoading && (
@@ -38,19 +52,19 @@ const AlbumDetails = () => {
         <>
           <section className="flex text-white items-end">
             <img
-              className="h-52 rounded-md hidden md:block mr-4"
-              src={data.images[0].url}
+              className="h-52 w-52 object-cover mr-4"
+              src={data.images[1].url}
               alt=""
             />
             <div>
               <p className="capitalize font-semibold">{data.album_type}</p>
               <h1 className="text-8xl font-bold my-5">{data.name}</h1>
-              <div className="flex space-x-1 font-semibold">
-                <h1 className="line-clamp-1">
+              <div className="space-x-1 font-semibold">
+                <h1 className="line-clamp-1 inline-block align-bottom">
                   {data.artists.map((artist, index) => (
                     <span key={artist.id}>
                       <span
-                        className="cursor-pointer hover:underline  text-sm"
+                        className="cursor-pointer hover:underline"
                         onClick={() => navigateToArtistDetails(artist.id)}
                       >
                         {artist.name}
@@ -59,10 +73,13 @@ const AlbumDetails = () => {
                     </span>
                   ))}
                 </h1>
-                <p>•</p>
-                <p>{data.release_date.slice(0, 4)}</p>
-                <p>•</p>
-                <p>{data.total_tracks} songs</p>
+                <p className="inline-block">•</p>
+                <p className="inline-block">{data.release_date.slice(0, 4)}</p>
+                <p className="inline-block">•</p>
+                <p className="inline-block">{data.total_tracks} songs,</p>
+                <p className="text-gray-300 inline-block">
+                  {sumTrackDuration(data)}
+                </p>
               </div>
             </div>
           </section>

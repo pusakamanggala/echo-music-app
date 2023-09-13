@@ -67,7 +67,10 @@ const PlaylistDetails = () => {
               >
                 {data.name}
               </h1>
-              <p className="text-gray-300">{data.description}</p>
+              <p
+                className="text-gray-300"
+                dangerouslySetInnerHTML={{ __html: data.description }}
+              />
               <div className=" space-x-1 mt-2">
                 <p className="inline-block">{data.owner.display_name}</p>
                 <p className="inline-block">•</p>

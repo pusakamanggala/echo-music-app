@@ -22,3 +22,22 @@
   background-color: #f3f3f3;
   border-radius: 4px;
 }
+
+/* animated background */
+.gradient-background {
+  background: linear-gradient(300deg, #2787ec81, #0056b3, #002e5b);
+  background-size: 180% 180%;
+  animation: gradient-animation 18s ease infinite;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

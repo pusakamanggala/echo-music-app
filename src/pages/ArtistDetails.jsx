@@ -34,7 +34,15 @@ const ArtistDetails = () => {
           <section className="text-white flex justify-between items-end">
             <div>
               <p className="capitalize font-semibold">{data.type}</p>
-              <h1 className="text-8xl font-bold my-5">{data.name}</h1>
+              <h1
+                className={`${
+                  data.name.length < 20
+                    ? "md:text-8xl text-3xl"
+                    : "md:text-5xl text-2xl"
+                } font-bold line-clamp-3 py-3 md:py-5`}
+              >
+                {data.name}
+              </h1>
               <p className="font-semibold">
                 {data.followers.total.toLocaleString()} Followers
               </p>

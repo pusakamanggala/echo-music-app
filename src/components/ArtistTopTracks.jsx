@@ -78,18 +78,20 @@ const ArtistTopTracks = ({ artistId }) => {
                   </div>
                 </div>
               ))}
-              <button
-                type="button"
-                title={
-                  isShowAll
-                    ? "Show less popular tracks"
-                    : "Show more popular tracks"
-                }
-                className="hover:underline hover:text-white cursor-pointer font-semibold text-gray-400"
-                onClick={() => setIsShowAll(!isShowAll)}
-              >
-                {isShowAll ? "Show less" : "Show more"}
-              </button>
+              {data.tracks.length > 5 && (
+                <button
+                  type="button"
+                  title={
+                    isShowAll
+                      ? "Show less popular tracks"
+                      : "Show more popular tracks"
+                  }
+                  className="hover:underline hover:text-white cursor-pointer font-semibold text-gray-400"
+                  onClick={() => setIsShowAll(!isShowAll)}
+                >
+                  {isShowAll ? "Show less" : "Show more"}
+                </button>
+              )}
             </>
           ) : null}
         </section>

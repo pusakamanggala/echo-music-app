@@ -40,8 +40,8 @@ const ArtistDetails = () => {
               </p>
             </div>
             <img
-              className="h-52 rounded-md hidden md:block"
-              src={data.images[2]?.url || MusicIcon}
+              className="h-52 w-52 object-cover"
+              src={data.images[0]?.url || MusicIcon}
               alt=""
             />
           </section>

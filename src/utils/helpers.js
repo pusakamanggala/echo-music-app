@@ -50,3 +50,29 @@ export const msToMinuteSecond = (milliseconds) => {
     .padStart(2, "0")}`;
   return formattedTime;
 };
+
+export const msToSentence = (ms) => {
+  const hours = Math.floor(ms / 3600000); // 1 hour = 3600000 milliseconds
+  const minutes = Math.floor((ms % 3600000) / 60000);
+  const seconds = Math.floor((ms % 60000) / 1000);
+
+  let sentence = "";
+
+  if (hours > 0) {
+    sentence += `${hours} hr `;
+  }
+
+  if (minutes > 0 || (hours === 0 && seconds > 0)) {
+    sentence += `${minutes} min `;
+  }
+
+  if (seconds > 0 && hours === 0) {
+    sentence += `${seconds} sec`;
+  }
+
+  if (sentence === "") {
+    sentence = "0 sec"; // Default to "0 sec" if there are no hours, minutes, or seconds
+  }
+
+  return sentence;
+};

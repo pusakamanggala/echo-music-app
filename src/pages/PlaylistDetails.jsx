@@ -48,30 +48,28 @@ const PlaylistDetails = () => {
       )}
       {isSuccess && (
         <>
-          <section className="flex mt-10">
-            <div className="mr-2">
-              <img
-                className="h-52 w-52 object-cover"
-                src={data.images[0].url}
-                alt=""
-              />
-            </div>
-            <div className="flex flex-col justify-end text-white font-semibold ">
+          <section className="flex mt-10 items-end space">
+            <img
+              className="mr-4 h-52 w-52 object-cover"
+              src={data.images[0].url}
+              alt=""
+            />
+            <div className="flex flex-col md:space-y-5 space-y-3 justify-end text-white font-semibold">
               <h3 className="capitalize">{data.type}</h3>
               <h1
                 className={`${
                   data.name.length < 20
                     ? "md:text-8xl text-5xl"
                     : "md:text-5xl text-2xl"
-                } font-bold my-5 line-clamp-3`}
+                } font-bold line-clamp-3`}
               >
                 {data.name}
               </h1>
-              <p
-                className="text-gray-300"
-                dangerouslySetInnerHTML={{ __html: data.description }}
-              />
-              <div className=" space-x-1 mt-2">
+              <div className="space-x-reverse space-x-1">
+                <p
+                  className="text-gray-300"
+                  dangerouslySetInnerHTML={{ __html: data.description }}
+                />
                 <p className="inline-block">{data.owner.display_name}</p>
                 <p className="inline-block">•</p>
                 <p className="inline-block">

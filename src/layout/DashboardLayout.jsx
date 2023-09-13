@@ -6,12 +6,14 @@ import NowPlayingContext from "../context/NowPlayingProvider";
 import PropType from "prop-types";
 import MobileNavBar from "../components/MobileNavBar";
 import useIsMobile from "../hooks/useIsMobile";
+import ExpiredSessionModal from "../components/ExpiredSessionModal";
 
 const DashboardLayout = ({ children }) => {
   const { playingView } = useContext(NowPlayingContext);
   const isMobile = useIsMobile();
   return (
     <div className="h-dvh relative">
+      <ExpiredSessionModal />
       <div className={`flex h-full bg-black pb-0 ${!isMobile && "p-4"}`}>
         {!isMobile && <Sidebar />}
         <main

@@ -2,10 +2,7 @@ import useLogin from "../hooks/useLogin";
 import Screenshot from "../img/screenshot.png";
 
 const LoginPage = () => {
-  const clientId = "4c028baed0074747ab50de3ba9ac86b9";
-  const clientSecret = "725be5fa28b749febd2b39ff7b971bc5";
-
-  const login = useLogin(clientId, clientSecret);
+  const login = useLogin();
 
   const handleLogin = () => {
     login.mutate();

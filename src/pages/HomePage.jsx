@@ -1,4 +1,4 @@
-import useFetchFeaturedPlaylists from "../hooks/useFecthFeaturedPLaylists";
+import useFetchFeaturedPlaylists from "../hooks/useFetchFeaturedPLaylists";
 import useFetchNewReleaseAlbum from "../hooks/useFetchNewReleaseAlbum";
 import { getAccessTokenFromCookie } from "../utils/helpers";
 import LoadingAnimation from "../img/loadingAnimation.gif";

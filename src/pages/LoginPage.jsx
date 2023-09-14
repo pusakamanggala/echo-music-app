@@ -8,12 +8,6 @@ const LoginPage = () => {
     login.mutate();
   };
 
-  if (login.isSuccess) {
-    // set the access token to cookie with 1 hour expiration
-    document.cookie = `access_token=${login.data.access_token};max-age=3600`;
-    // reload the page
-    window.location.reload();
-  }
   return (
     <div className="gradient-background h-dvh md:grid md:grid-cols-2 ">
       <div className="h-full overflow-hidden md:block hidden ">
@@ -36,9 +30,9 @@ const LoginPage = () => {
           type="button"
           title="Login"
           className="text-white text-sm md:text-base lg:text-xl p-3 rounded-2xl bg-green-600 hover:bg-green-700 shadow-md"
-          onClick={handleLogin}
+          onClick={() => handleLogin()}
         >
-          Take me in !
+          {login.isLoading ? "Loading..." : "Take me in !"}
         </button>
       </div>
       <footer className="absolute bottom-5 right-5 text-white">
@@ -46,6 +40,7 @@ const LoginPage = () => {
         <a
           href="https://pusakamanggala.netlify.app/"
           target="_blank"
+          rel="noreferrer"
           className="hover:underline"
         >
           Pusaka Manggala

@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import DashboardLayout from "../layout/DashboardLayout";
 import HomePage from "../pages/HomePage";
@@ -12,17 +13,11 @@ import ArtistDetails from "../pages/ArtistDetails";
 import AlbumDetails from "../pages/AlbumDetails";
 
 const Router = () => {
-  const isAuthenticated = () => {
-    const accessToken = getAccessTokenFromCookie();
-    return accessToken !== null; // If accessToken is not null, user is authenticated
-  };
+  const accessToken = getAccessTokenFromCookie();
 
-  let isLogin = isAuthenticated();
-
-  // Update isLogin to false if there is no accessToken
-  if (!getAccessTokenFromCookie()) {
-    isLogin = false;
-  }
+  const isLogin = useMemo(() => {
+    return !!accessToken;
+  }, [accessToken]);
 
   return (
     <BrowserRouter>

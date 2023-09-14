@@ -1,14 +1,10 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRotateRight } from "@fortawesome/free-solid-svg-icons";
-import { getAccessTokenFromCookie } from "../utils/helpers";
+import { useSession } from "../context/SessionProvider";
 
 const ExpiredSessionModal = () => {
-  const accessToken = getAccessTokenFromCookie();
-
-  console.log(accessToken);
+  const { userSession } = useSession();
 
   return (
-    accessToken === undefined && (
+    !userSession && (
       <div className="fixed inset-0 flex flex-col space-y-4 items-center justify-center z-50 h-dvh w-screen bg-black/75 bg-opacity-30">
         <div className="h-4/6 w-4/6 relative overflow-hidden flex items-center justify-center">
           <div className="absolute text-white md:text-4xl text-xl font-semibold text-center mx-8">
@@ -19,6 +15,7 @@ const ExpiredSessionModal = () => {
             className="text-base absolute bottom-5 text-white right-5 hover:underline"
             href="https://developer.spotify.com/documentation/web-api/concepts/rate-limits"
             target="_blank"
+            rel="noreferrer"
           >
             Learn more
           </a>

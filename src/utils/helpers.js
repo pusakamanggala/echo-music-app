@@ -30,9 +30,6 @@ export const getAccessTokenFromCookie = () => {
       const accessTokenValue = cookie.split("=")[1];
       return accessTokenValue;
     }
-    // else {
-    //   // window.location.reload();
-    // }
   }
 };
 

@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { useSession } from "../context/SessionProvider";
 
 const useSearchSpotifyItem = ({
   accessToken,
@@ -8,6 +9,8 @@ const useSearchSpotifyItem = ({
   offset = 0,
   autoFetch,
 }) => {
+  const { handleSessionExpired } = useSession();
+
   const fetchSpotifyItems = async () => {
     let url = `${import.meta.env.VITE_API_URL}/search?q=${encodeURIComponent(
       searchQuery
@@ -21,7 +24,12 @@ const useSearchSpotifyItem = ({
     });
 
     if (!response.ok) {
-      throw new Error(`Failed to fetch ${searchType}`);
+      if (response.status === 401) {
+        handleSessionExpired();
+        throw new Error("Invalid access token");
+      } else {
+        throw new Error(`Failed to fetch ${searchType}`);
+      }
     }
 
     const data = await response.json();
@@ -29,7 +37,8 @@ const useSearchSpotifyItem = ({
   };
 
   return useQuery([searchType, searchQuery, limit, offset], fetchSpotifyItems, {
-    enabled: autoFetch, // Pass the autoFetch option to the enabled property
+    enabled: autoFetch,
+    retry: 1, // Set the retry option to 1
   });
 };
 

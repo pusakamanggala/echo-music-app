@@ -21,10 +21,25 @@ const useLogin = () => {
           throw new Error(errorData.error_description);
         });
       }
-
       return res.json();
     })
   );
+
+  if (loginMutation.isError) {
+    alert(
+      "Something went wrong, please try again later. Or contact the developer at https://pusakamanggala.netlify.app/."
+    );
+    loginMutation.reset();
+  }
+
+  if (loginMutation.isSuccess) {
+    // Set the access token to a cookie with a maximum age of 3600 seconds (1 hour)
+    document.cookie = `access_token=${loginMutation.data.access_token};max-age=3600`;
+    loginMutation.reset();
+
+    // Reload the page
+    window.location.reload();
+  }
 
   return loginMutation;
 };

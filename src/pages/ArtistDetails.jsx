@@ -48,7 +48,7 @@ const ArtistDetails = () => {
               </p>
             </div>
             <img
-              className="h-52 w-52 object-cover"
+              className="mr-4 md:h-52 md:w-52 w-32 h-32 object-cover"
               src={data.images[0]?.url || MusicIcon}
               alt=""
             />

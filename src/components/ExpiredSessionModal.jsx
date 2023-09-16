@@ -21,7 +21,7 @@ const ExpiredSessionModal = () => {
           </a>
           <img
             src="https://wallpapercrafter.com/th800/15664-glass-drops-wet-rain-transparent-moody-window-4k.jpg"
-            alt=""
+            alt="Session Expired"
             className="object-cover w-full h-full"
           />
         </div>

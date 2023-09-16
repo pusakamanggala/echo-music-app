@@ -36,6 +36,7 @@ const Browse = () => {
         <FontAwesomeIcon icon={faMagnifyingGlass} className="text-white" />
         <input
           title="Browse Item"
+          name="Browse Item"
           autoFocus
           type="text"
           value={searchQuery}

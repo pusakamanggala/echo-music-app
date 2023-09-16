@@ -18,7 +18,11 @@ const BrowseTrackResult = ({ searchQuery }) => {
   return (
     <>
       {isLoading && (
-        <img className="mx-auto w-28" src={LoadingAnimation} alt="" />
+        <img
+          className="mx-auto w-28"
+          src={LoadingAnimation}
+          alt="Loading Animation"
+        />
       )}
       {isError && (
         <h1 className="font-semibold text-center text-white">

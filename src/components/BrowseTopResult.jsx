@@ -18,7 +18,11 @@ const BrowseTopResult = ({ searchQuery }) => {
   return (
     <>
       {isLoading && (
-        <img className="mx-auto w-28" src={LoadingAnimation} alt="" />
+        <img
+          className="mx-auto w-28"
+          src={LoadingAnimation}
+          alt="Loading Animation"
+        />
       )}
       {isError && (
         <h1 className="font-semibold text-center text-white">
@@ -35,7 +39,7 @@ const BrowseTopResult = ({ searchQuery }) => {
             <img
               className="h-44 rounded-md"
               src={data.playlists.items[0].images[0].url}
-              alt=""
+              alt={data.playlists.items[0].name}
             />
             <h1 className="my-2 font-bold text-xl line-clamp-1">
               {data.playlists.items[0].name}

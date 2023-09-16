@@ -34,7 +34,11 @@ const PlayingView = () => {
     <>
       {isLoading && (
         <section className="h-full flex justify-center items-center">
-          <img className="w-28" src={LoadingAnimation} alt="" />
+          <img
+            className="w-28"
+            src={LoadingAnimation}
+            alt="Loading Animation"
+          />
         </section>
       )}
       {isError && (
@@ -63,7 +67,7 @@ const PlayingView = () => {
           </div>
           <img
             src={data.album.images[0].url}
-            alt="Song Cover"
+            alt={data.album.name}
             className="rounded-lg mr-2 w-full"
           />
           <section className="my-4">
@@ -92,7 +96,7 @@ const PlayingView = () => {
             <section className="my-4">
               <img
                 src={artistData.images[0]?.url || MusicIcon}
-                alt=""
+                alt={artistData.name || "Music Icon"}
                 className="w-full rounded-lg"
               />
               <h1

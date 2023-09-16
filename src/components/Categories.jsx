@@ -17,7 +17,11 @@ const Categories = () => {
     <div className="h-full">
       {isLoading && (
         <div className="h-full flex flex-col justify-center">
-          <img className="mx-auto w-28" src={LoadingAnimation} alt="" />
+          <img
+            className="mx-auto w-28"
+            src={LoadingAnimation}
+            alt="Loading Animation"
+          />
         </div>
       )}
       {isError && (
@@ -39,7 +43,7 @@ const Categories = () => {
               >
                 <img
                   src={category.icons[0].url}
-                  alt=""
+                  alt={category.name}
                   className="rounded-lg"
                 />
                 <h1 className="absolute bottom-2 right-3 text-lg font-bold text-white">

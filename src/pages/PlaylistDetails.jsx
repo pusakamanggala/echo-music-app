@@ -39,7 +39,11 @@ const PlaylistDetails = () => {
     <>
       {isLoading && (
         <div className="flex justify-center items-center h-full">
-          <img className="w-20" src={LoadingAnimation} alt="" />
+          <img
+            className="w-20"
+            src={LoadingAnimation}
+            alt="Loading Animation"
+          />
         </div>
       )}
       {isError && (
@@ -55,7 +59,7 @@ const PlaylistDetails = () => {
             <img
               className="mr-4 md:h-52 md:w-52 w-32 h-32 object-cover"
               src={data.images[0].url}
-              alt=""
+              alt="Loading Animation"
             />
             <div className="flex flex-col justify-end text-white font-semibold">
               <h3 className="capitalize">{data.type}</h3>
@@ -111,7 +115,7 @@ const PlaylistDetails = () => {
                           {nowPlaying === track.track.id ? (
                             <img
                               src={MusicPlayingIcon}
-                              alt=""
+                              alt="Music Playing Icon"
                               className="h-10 w-6 mx-auto"
                             />
                           ) : (
@@ -122,6 +126,7 @@ const PlaylistDetails = () => {
                           <img
                             className="h-12 mr-2"
                             src={track.track.album.images[2]?.url || MusicIcon}
+                            alt={track.track.name || "Music Icon"}
                           />
                           <div>
                             <h1

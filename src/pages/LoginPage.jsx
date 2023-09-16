@@ -14,7 +14,7 @@ const LoginPage = () => {
         <img
           src={Screenshot}
           className="object-cover object-right h-full"
-          alt=""
+          alt="App Screenshot"
         />
       </div>
 

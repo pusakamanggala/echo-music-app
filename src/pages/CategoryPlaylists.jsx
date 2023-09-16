@@ -25,13 +25,15 @@ const CategoryPlaylists = () => {
       type: "playlists",
     });
 
-  console.log(playlistsData);
-
   return (
     <div className="h-full">
       {isLoading && (
         <div className="h-full flex flex-col justify-center">
-          <img className="mx-auto w-28" src={LoadingAnimation} alt="" />
+          <img
+            className="mx-auto w-28"
+            src={LoadingAnimation}
+            alt="Loading Animation"
+          />
         </div>
       )}
       {isError && (
@@ -48,7 +50,7 @@ const CategoryPlaylists = () => {
             <img
               className="w-60 rounded-lg hidden md:block"
               src={data.icons[0].url}
-              alt=""
+              alt={data.name}
             />
           </div>
           <div>

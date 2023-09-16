@@ -97,7 +97,7 @@ const SongPlayer = () => {
         <div className="flex items-center">
           <img
             src={isSuccess ? data.album.images[2].url : musicIcon} // Replace with your song cover image URL
-            alt="Song Cover"
+            alt={isSuccess ? data.name : "Music Icon"}
             className="h-16 rounded-md mr-2"
           />
           <div className="song-details">

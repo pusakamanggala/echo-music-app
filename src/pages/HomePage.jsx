@@ -54,7 +54,11 @@ const HomePage = () => {
         </h1>
       </section>
       {isFeaturedPlaylistsLoading && (
-        <img className="mx-auto w-28" src={LoadingAnimation} alt="" />
+        <img
+          className="mx-auto w-28"
+          src={LoadingAnimation}
+          alt="Loading Animation"
+        />
       )}
       {isFeaturedPlaylistsError && (
         <h1 className="font-semibold text-center text-white">
@@ -97,7 +101,11 @@ const HomePage = () => {
         </h1>
       </section>
       {isNewAlbumLoading && (
-        <img className="mx-auto w-28" src={LoadingAnimation} alt="" />
+        <img
+          className="mx-auto w-28"
+          src={LoadingAnimation}
+          alt="Loading Animation"
+        />
       )}
       {isNewAlbumError && (
         <h1 className="font-semibold text-center text-white">

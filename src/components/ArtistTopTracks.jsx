@@ -43,7 +43,7 @@ const ArtistTopTracks = ({ artistId }) => {
                     {nowPlaying === track.id ? (
                       <img
                         src={MusicPlayingIcon}
-                        alt=""
+                        alt="Music Playing Icon"
                         className="h-10 w-6 mx-auto"
                       />
                     ) : (

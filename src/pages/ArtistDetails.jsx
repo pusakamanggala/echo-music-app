@@ -19,7 +19,11 @@ const ArtistDetails = () => {
     <section className="h-full">
       {isLoading && (
         <div className="h-full flex justify-center items-center ">
-          <img className="h-20" src={LoadingAnimation} alt="" />
+          <img
+            className="h-20"
+            src={LoadingAnimation}
+            alt="Loading Animation"
+          />
         </div>
       )}
       {isError && (
@@ -50,7 +54,7 @@ const ArtistDetails = () => {
             <img
               className="mr-4 md:h-52 md:w-52 w-32 h-32 object-cover"
               src={data.images[0]?.url || MusicIcon}
-              alt=""
+              alt={data.name || "Music Icon"}
             />
           </section>
           <ArtistTopTracks artistId={artistId} />

@@ -38,7 +38,11 @@ const AlbumDetails = () => {
     <section className="h-full">
       {isLoading && (
         <div className="h-full flex justify-center items-center ">
-          <img className="h-20" src={LoadingAnimation} alt="" />
+          <img
+            className="h-20"
+            src={LoadingAnimation}
+            alt="Loading Animation"
+          />
         </div>
       )}
       {isError && (
@@ -54,7 +58,7 @@ const AlbumDetails = () => {
             <img
               className="md:h-52 md:w-52 w-32 h-32 object-cover mr-4 items-end"
               src={data.images[1].url}
-              alt=""
+              alt={data.name}
             />
             <div className="flex flex-col">
               <p className="capitalize font-semibold">{data.album_type}</p>
@@ -114,7 +118,7 @@ const AlbumDetails = () => {
                       {nowPlaying === track.id ? (
                         <img
                           src={MusicPlayingIcon}
-                          alt=""
+                          alt="Music Playing Icon"
                           className="h-10 w-6 mx-auto"
                         />
                       ) : (

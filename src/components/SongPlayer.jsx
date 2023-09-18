@@ -31,7 +31,7 @@ const SongPlayer = () => {
   const navigateToAlbumDetails = useNavigateToAlbumDetails();
   const navigateToArtistDetails = useNavigateToArtistDetails();
 
-  const { nowPlaying, setPlayingView, playingView } =
+  const { nowPlaying, setPlayingView, playingView, setTrackProgress } =
     useContext(NowPlayingContext);
 
   const { data, isSuccess } = useFetchTrack({
@@ -47,6 +47,7 @@ const SongPlayer = () => {
   const handleProgressChange = (event) => {
     const newProgress = parseInt(event.target.value);
     setProgress(newProgress);
+    setTrackProgress(newProgress);
   };
 
   const handleVolumeChange = (event) => {
@@ -75,17 +76,24 @@ const SongPlayer = () => {
           const newProgress = prevProgress + (100 / data.duration_ms) * 1000;
           return newProgress > 100 ? 100 : newProgress;
         });
+
+        setTrackProgress((prevTrackProgress) => {
+          const newTrackProgress =
+            prevTrackProgress + (100 / data.duration_ms) * 1000;
+          return newTrackProgress > 100 ? 100 : newTrackProgress;
+        });
       }, 1000);
 
       return () => clearInterval(interval);
     }
-  }, [isPlaying, isSuccess, data]);
+  }, [isPlaying, isSuccess, data, setTrackProgress]);
 
   useEffect(() => {
     // Reset progress when a new song is played
     setProgress(0);
+    setTrackProgress(0);
     setIsPlaying(true);
-  }, [nowPlaying]);
+  }, [nowPlaying, setTrackProgress]);
 
   return (
     <>

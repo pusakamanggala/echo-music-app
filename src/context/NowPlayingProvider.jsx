@@ -6,6 +6,7 @@ const NowPlayingContext = createContext();
 
 export const NowPlayingProvider = ({ children }) => {
   const isMobile = useIsMobile();
+  const [trackProgress, setTrackProgress] = useState(0);
   const [nowPlaying, setNowPlaying] = useState(() => {
     const storedNowPlaying = sessionStorage.getItem("nowPlaying");
     return storedNowPlaying || "";
@@ -30,6 +31,8 @@ export const NowPlayingProvider = ({ children }) => {
         playingView,
         setPlayingView,
         handlePlayTrack,
+        trackProgress,
+        setTrackProgress,
       }}
     >
       {children}

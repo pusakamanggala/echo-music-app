@@ -1,7 +1,10 @@
+import { useState } from "react";
 import useLogin from "../hooks/useLogin";
 import Screenshot from "../img/screenshot.png";
+import About from "../components/About";
 
 const LoginPage = () => {
+  const [showAbout, setShowAbout] = useState(false);
   const login = useLogin();
 
   const handleLogin = () => {
@@ -17,7 +20,12 @@ const LoginPage = () => {
           alt="App Screenshot"
         />
       </div>
-
+      <div className="absolute top-5 right-5 text-white">
+        <button onClick={() => setShowAbout(true)} title="About" type="button">
+          About
+        </button>
+      </div>
+      {showAbout && <About show={setShowAbout} />}
       <div className="flex flex-col justify-center items-center h-full">
         <h1 className="text-white font-semibold text-2xl md:text-4xl lg:text-5xl xl:text-8xl">
           Welcome

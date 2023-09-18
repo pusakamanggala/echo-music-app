@@ -11,6 +11,7 @@ import ArtistTopTracks from "./ArtistTopTracks";
 import useNavigateToArtistDetails from "../hooks/useNavigateToArtistDetails";
 import useNavigateToAlbumDetails from "../hooks/useNavigateToAlbumDetails";
 import MusicIcon from "../img/music-icon.jpg";
+import TrackLyric from "./TrackLyric";
 
 const PlayingView = () => {
   const accessToken = getAccessTokenFromCookie();
@@ -91,6 +92,7 @@ const PlayingView = () => {
               ))}
             </h1>
           </section>
+          <TrackLyric trackId={nowPlaying} trackDurationMs={data.duration_ms} />
           <ArtistTopTracks artistId={data.artists[0].id} />
           {isArtistSuccess && (
             <section className="my-4">

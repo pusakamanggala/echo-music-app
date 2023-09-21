@@ -28,8 +28,8 @@ const TrackLyric = ({ trackId, trackDurationMs }) => {
     isSuccess && (
       <section
         className={` ${
-          isShowLyric ? "bg-sky-700" : "bg-white/20"
-        } rounded-lg p-4  relative overflow-hidden`}
+          isShowLyric ? "bg-sky-600" : "bg-white/20"
+        } rounded-lg p-4  relative overflow-hidden transition-colors duration-300 ease-in-out`}
       >
         <div className="flex justify-between items-center">
           <h1 className="font-bold ">Lyrics</h1>
@@ -48,7 +48,7 @@ const TrackLyric = ({ trackId, trackDurationMs }) => {
                 key={index}
                 className={` ${getTextColor(
                   parseInt(line.startTimeMs, 10)
-                )} text-lg font-bold`}
+                )} text-lg font-bold ransition-colors duration-300 ease-in-out`}
               >
                 {line.words}
               </p>

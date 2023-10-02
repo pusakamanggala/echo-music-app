@@ -18,6 +18,9 @@ For detailed information on these technologies, please refer to their respective
 
 The music data is sourced from the [Spotify Web API](https://developer.spotify.com/documentation/web-api). Please refer to their documentation for more information on how to use the API and obtain necessary credentials.
 
+## Track Lyrics API
+The Track Lyrics API is provided by [Akash R Chandran](https://github.com/akashrchandran/spotify-lyrics-api). For detailed information on how to use this API, please refer to their documentation.
+
 ## Features
 
 - Users can explore tracks, artists, playlists, and albums from the Spotify catalog.

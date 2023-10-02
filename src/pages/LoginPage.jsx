@@ -1,6 +1,6 @@
 import { useState } from "react";
 import useLogin from "../hooks/useLogin";
-import Screenshot from "../img/screenshot.png";
+import Screenshot from "../img/screenshot.webp";
 import About from "../components/About";
 
 const LoginPage = () => {

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import useGetFetchLimit from "../hooks/useGetFecthLimit";
 import useNavigatePlaylistDetails from "../hooks/useNavigatePlaylistDetails";
 import useNavigateToAlbumDetails from "../hooks/useNavigateToAlbumDetails";
+import Banner from "../components/Banner";
 
 const HomePage = () => {
   const accessToken = getAccessTokenFromCookie();
@@ -35,13 +36,14 @@ const HomePage = () => {
   return (
     <>
       {/* Banner */}
-      <section className="rounded-lg bg-black text-white overflow-hidden relative w-full">
+      {/* <section className="rounded-lg bg-black text-white overflow-hidden relative w-full">
         <img
           src="https://wallpapercave.com/wp/wp6386546.jpg"
           alt="banner"
           className="h-auto w-full object-contain sm:h-72 md:h-96"
         />
-      </section>
+      </section> */}
+      <Banner />
 
       {/* featured PLaylist */}
       <section className="flex justify-between items-center text-white">

@@ -9,20 +9,23 @@ import BrowsePlaylistResult from "../components/BrowsePlaylistResult";
 import BrowseArtistResult from "../components/BrowseArtistResult";
 import Categories from "../components/Categories";
 import useIsMobile from "../hooks/useIsMobile";
+import { useDebounce } from "use-debounce";
 
 const Browse = () => {
-  const [isFocused, setIsFocused] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isFocused, setIsFocused] = useState(false);
   const accessToken = getAccessTokenFromCookie();
   const isMobile = useIsMobile();
 
-  // fetch one data here to check if the searchQuery is exist
+  const debounceDelay = searchQuery ? 1000 : 0; // Set the debounce delay to 1000ms if searchQuery is not empty, otherwise 0ms (no debounce)
+  const [debouncedSearchQuery] = useDebounce(searchQuery, debounceDelay);
+
   const { data, isError, isSuccess } = useSearchSpotifyItem({
     accessToken,
     limit: 1,
-    searchQuery: searchQuery,
+    searchQuery: debouncedSearchQuery,
     searchType: ["playlist", "track", "artist"],
-    autoFetch: searchQuery !== "" ? true : false, // only fetch when searchQuery is not empty
+    autoFetch: debouncedSearchQuery !== "" ? true : false,
   });
 
   return (
@@ -59,34 +62,34 @@ const Browse = () => {
           onClick={() => setSearchQuery("")}
         />
       </div>
-      {!searchQuery && <Categories />}
-      {isSuccess && searchQuery && searchQuery !== "" && (
+      {!debouncedSearchQuery && <Categories />}
+      {isSuccess && debouncedSearchQuery && debouncedSearchQuery !== "" && (
         <>
           {isMobile ? (
             <div className="grid gap-6">
               {data.tracks.items.length > 0 && (
-                <BrowseTrackResult searchQuery={searchQuery} />
+                <BrowseTrackResult searchQuery={debouncedSearchQuery} />
               )}
               {data.playlists.items.length > 0 && (
-                <BrowseTopResult searchQuery={searchQuery} />
+                <BrowseTopResult searchQuery={debouncedSearchQuery} />
               )}
             </div>
           ) : (
             <div className="grid grid-cols-2 gap-6">
               {data.playlists.items.length > 0 && (
-                <BrowseTopResult searchQuery={searchQuery} />
+                <BrowseTopResult searchQuery={debouncedSearchQuery} />
               )}
               {data.tracks.items.length > 0 && (
-                <BrowseTrackResult searchQuery={searchQuery} />
+                <BrowseTrackResult searchQuery={debouncedSearchQuery} />
               )}
             </div>
           )}
 
           {data.playlists.items.length > 0 && (
-            <BrowsePlaylistResult searchQuery={searchQuery} />
+            <BrowsePlaylistResult searchQuery={debouncedSearchQuery} />
           )}
           {data.artists.items.length > 0 && (
-            <BrowseArtistResult searchQuery={searchQuery} />
+            <BrowseArtistResult searchQuery={debouncedSearchQuery} />
           )}
         </>
       )}

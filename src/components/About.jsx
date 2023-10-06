@@ -24,10 +24,10 @@ const About = ({ show }) => {
             owners.
           </h1>
           <h1>
-            While you can interact with the player's controls, it won't play
-            actual songs due to technical constraints. For an immersive music
-            streaming experience, it is recommended to use official Spotify
-            music streaming platforms.
+            While you can interact with the player&apos;s controls, it
+            won&apos;t play actual songs due to technical constraints. For an
+            immersive music streaming experience, it is recommended to use
+            official Spotify music streaming platforms.
           </h1>
         </section>
         <section>

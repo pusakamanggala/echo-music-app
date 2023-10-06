@@ -2,6 +2,7 @@ import useFetchArtistAlbums from "../hooks/useFetchArtistAlbums";
 import { getAccessTokenFromCookie } from "../utils/helpers";
 import useGetFecthLimit from "../hooks/useGetFecthLimit";
 import useNavigateToAlbumDetails from "../hooks/useNavigateToAlbumDetails";
+import PropTypes from "prop-types";
 
 const ArtistsAlbum = ({ artistId }) => {
   const accessToken = getAccessTokenFromCookie();
@@ -53,3 +54,7 @@ const ArtistsAlbum = ({ artistId }) => {
 };
 
 export default ArtistsAlbum;
+
+ArtistsAlbum.propTypes = {
+  artistId: PropTypes.string.isRequired,
+};

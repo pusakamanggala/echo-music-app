@@ -1,5 +1,7 @@
 # Echo
 
+![Page Screenshot](public/Screenshot.png)
+
 Echo is a web application that allows users to explore tracks, artists, playlists, albums, and more from the Spotify music catalog. It utilizes the Spotify Web API for developers to provide a seamless music exploration experience. Users can search for their favorite songs, discover new artists, playlists, and albums.
 
 ## Technologies

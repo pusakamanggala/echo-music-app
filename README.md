@@ -4,6 +4,8 @@
 
 Echo is a web application that allows users to explore tracks, artists, playlists, albums, and more from the Spotify music catalog. It utilizes the Spotify Web API for developers to provide a seamless music exploration experience. Users can search for their favorite songs, discover new artists, playlists, and albums.
 
+>This app is a personal project created by Pusaka Manggala and has no official affiliation with Spotify. This app is the result of personal learning and experimentation, and is not approved, endorsed, or maintained by Spotify. All trademarks, brand names, and content associated with Spotify are the property of their respective owners.
+
 ## Technologies
 
 Echo App is built with the following technologies:

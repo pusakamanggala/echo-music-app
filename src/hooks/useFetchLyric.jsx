@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const useFetchLyric = ({ trackId }) => {
   const fetchLyric = async () => {
-    let url = `https://spotify-lyric-api.herokuapp.com/?trackid=${trackId}`;
+    let url = `${import.meta.env.VITE_LYRICS_URL}/?trackid=${trackId}`;
 
     const response = await fetch(url, {
       method: "GET",

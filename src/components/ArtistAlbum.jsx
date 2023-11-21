@@ -22,9 +22,6 @@ const ArtistsAlbum = ({ artistId }) => {
         <section>
           <div className="flex justify-between items-center text-white mb-8">
             <h1 className="text-xl font-bold">Albums</h1>
-            <h1 className="font-semibold cursor-pointer hover:underline">
-              Show all
-            </h1>
           </div>
           <div className={`grid ${gridSize} gap-4`}>
             {data.items.map((album) => (

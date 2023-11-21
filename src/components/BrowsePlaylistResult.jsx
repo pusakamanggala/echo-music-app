@@ -1,6 +1,5 @@
 import useSearchSpotifyItem from "../hooks/useSearchSpotifyItem";
 import { getAccessTokenFromCookie } from "../utils/helpers";
-import LoadingAnimation from "../img/loadingAnimation.gif";
 import useGetFetchLimit from "../hooks/useGetFecthLimit";
 import PropTypes from "prop-types";
 import useNavigatePlaylistDetails from "../hooks/useNavigatePlaylistDetails";
@@ -17,15 +16,32 @@ const BrowsePlaylistResult = ({ searchQuery }) => {
     offset: 1,
     searchType: "playlist",
   });
+
+  const LoadingSkeleton = (gridSize, length) => {
+    const skeletonItems = Array.from({ length: length });
+
+    return (
+      <div className="w-full">
+        <h1 className="font-bold text-white text-xl my-6">Playlists</h1>
+        <div className={`grid ${gridSize} gap-4`}>
+          {skeletonItems.map((_, index) => (
+            <div
+              key={index}
+              className="bg-white/20 backdrop-filter rounded-lg p-4 shadow-md text-white animate-pulse"
+            >
+              <div className="w-full mb-2 h-36 bg-gray-500 rounded-md"></div>
+              <div className="h-6 bg-gray-400 mb-2 w-4/5"></div>
+              <p className="h-4 bg-gray-400 w-20"></p>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <>
-      {isLoading && (
-        <img
-          className="mx-auto w-28"
-          src={LoadingAnimation}
-          alt="Loading Animation"
-        />
-      )}
+      {isLoading && LoadingSkeleton(gridSize, fetchLimit)}
       {isError && (
         <h1 className="font-semibold text-center text-white">
           Something went wrong, please try again

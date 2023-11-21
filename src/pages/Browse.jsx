@@ -29,7 +29,7 @@ const Browse = () => {
   });
 
   return (
-    <div className="h-full flex flex-col">
+    <div className="flex flex-col">
       {/* Search Bar */}
       <div
         className={`rounded-3xl md:w-96 bg-slate-600/70 border-2 p-3 flex items-center ${
@@ -98,20 +98,18 @@ const Browse = () => {
         data.playlists.items.length < 1 &&
         data.artists.items.length < 1 &&
         data.tracks.items.length < 1 && (
-          <div className=" h-full flex justify-center text-white items-center ">
-            <div className="text-center">
-              <h1 className="font-bold text-2xl mb-2">
-                No result found for &quot;{searchQuery}&quot;
-              </h1>
-              <h1>
-                Please make sure your words are spelled correctly, or use fewer
-                or different keywords.
-              </h1>
-            </div>
+          <div className="text-center text-white">
+            <h1 className="font-bold text-2xl mb-2">
+              No result found for &quot;{searchQuery}&quot;
+            </h1>
+            <h1>
+              Please make sure your words are spelled correctly, or use fewer or
+              different keywords.
+            </h1>
           </div>
         )}
       {isError && (
-        <div className=" h-full flex justify-center text-white items-center ">
+        <div className="text-white">
           <h1 className="font-semibold text-center text-white">
             Something went wrong, please try again
           </h1>

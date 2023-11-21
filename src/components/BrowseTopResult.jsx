@@ -1,6 +1,5 @@
 import useSearchSpotifyItem from "../hooks/useSearchSpotifyItem";
 import { getAccessTokenFromCookie } from "../utils/helpers";
-import LoadingAnimation from "../img/loadingAnimation.gif";
 import PropTypes from "prop-types";
 import useNavigatePlaylistDetails from "../hooks/useNavigatePlaylistDetails";
 
@@ -15,15 +14,22 @@ const BrowseTopResult = ({ searchQuery }) => {
     searchType: "playlist",
   });
 
+  const LoadingSkeleton = () => {
+    return (
+      <div className="w-full">
+        <h1 className="font-bold text-white text-xl my-3">Top Result</h1>
+        <div className="bg-white/20 backdrop-filter rounded-lg p-4 animate-pulse">
+          <div className="h-44 aspect-square rounded-md bg-gray-500"></div>
+          <div className="my-2 bg-gray-400 h-6 w-48"></div>
+          <div className="bg-gray-400 h-4 w-20"></div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <>
-      {isLoading && (
-        <img
-          className="mx-auto w-28"
-          src={LoadingAnimation}
-          alt="Loading Animation"
-        />
-      )}
+      {isLoading && LoadingSkeleton()}
       {isError && (
         <h1 className="font-semibold text-center text-white">
           Something went wrong, please try again

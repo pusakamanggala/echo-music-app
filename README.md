@@ -51,6 +51,7 @@ npm install
 3. Configure Spotify API credentials: Obtain your Spotify API credentials by registering your application on the Spotify Developer Dashboard. Once you have the credentials (Client ID and Client Secret), create a .env file in the project root directory and add the following:
  ```bash  
 VITE_API_URL = spotify_api_url
+VITE_LYRICS_URL = [find the url in this repo https://github.com/akashrchandran/spotify-lyrics-api.git]
 VITE_CLIENT_ID = client_id
 VITE_CLIENT_SECRET = client_secret
 ```
